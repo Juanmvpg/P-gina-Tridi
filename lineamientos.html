@@ -1,0 +1,307 @@
+<!DOCTYPE html><html class="light" lang="es" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Lineamientos - Tridimensionando Ideas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {"on-secondary-fixed": "#001c3a", "primary-fixed": "#ffdbd0", "on-primary-container": "#fffbff", "on-tertiary-container": "#fefcff", "on-primary-fixed-variant": "#852400", tertiary: "#005cad", "tertiary-container": "#0075d8", "on-tertiary-fixed-variant": "#004787", background: "#fcf9f3", "surface-container": "#f0eee8", "on-primary-fixed": "#3a0b00", "surface-container-lowest": "#ffffff", surface: "#fcf9f3", "secondary-fixed-dim": "#a6c8ff", "on-surface-variant": "#5c4038", "secondary-fixed": "#d4e3ff", "tech-blue": "#138EFF", outline: "#916f66", "on-secondary-fixed-variant": "#004786", "outline-variant": "#e6beb2", "on-secondary-container": "#fefcff", "surface-variant": "#e5e2dc", "primary-container": "#d43f00", "on-secondary": "#ffffff", "carbon-black": "#1A1A1A", "surface-container-highest": "#e5e2dc", "primary-fixed-dim": "#ffb59e", "surface-tint": "#ae3200", "on-background": "#1c1c18", "inverse-surface": "#31312d", "workshop-white": "#FFFFFF", error: "#ba1a1a", "on-error": "#ffffff", "inverse-primary": "#ffb59e", "surface-dim": "#dcdad4", "on-tertiary-fixed": "#001c3b", "surface-container-high": "#ebe8e2", "on-tertiary": "#ffffff", "surface-container-low": "#f6f3ed", "error-container": "#ffdad6", "tertiary-fixed-dim": "#a6c8ff", "blueprint-gray": "#E2E8F0", "on-primary": "#ffffff", "secondary-container": "#0075d6", "inverse-on-surface": "#f3f0ea", "tertiary-fixed": "#d5e3ff", "on-surface": "#1c1c18", "surface-bright": "#fcf9f3", "on-error-container": "#93000a", "action-orange": "#FC4C00", primary: "#aa3000", secondary: "#005cab"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}, spacing: {"gutter-mobile": "16px", "container-max": "1280px", "stack-sm": "8px", "stack-md": "16px", "gutter-desktop": "24px", base: "8px", "stack-lg": "32px"}, fontFamily: {"label-sm": ["Inter"], "label-md": ["Inter"], "display-lg": ["Sora"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Sora"], "headline-md": ["Sora"], "body-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Sora"], headline: ["Sora"], display: ["Sora"], body: ["Plus Jakarta Sans"], label: ["Inter"]}, fontSize: {"label-sm": ["12px", {lineHeight: "16px", fontWeight: "600"}], "label-md": ["14px", {lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "500"}], "display-lg": ["48px", {lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700"}], "body-lg": ["18px", {lineHeight: "28px", fontWeight: "400"}], "headline-lg": ["32px", {lineHeight: "40px", fontWeight: "600"}], "headline-md": ["24px", {lineHeight: "32px", fontWeight: "600"}], "body-md": ["16px", {lineHeight: "24px", fontWeight: "400"}], "headline-lg-mobile": ["28px", {lineHeight: "36px", fontWeight: "600"}]}}}};</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcf9f3;
+            color: #1c1c18;
+            -webkit-font-smoothing: antialiased;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface-container dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-action-orange">Tridimensionando Ideas</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:bg-surface-bright dark:hover:bg-surface-variant transition-colors px-3 py-2 rounded-lg" href="index.html">Inicio</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:bg-surface-bright dark:hover:bg-surface-variant transition-colors px-3 py-2 rounded-lg" href="recursos.html">Recursos</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary px-3 py-2" href="lineamientos.html">Lineamientos</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-bright p-2 rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-bright p-2 rounded-full transition-colors">help_outline</button>
+<button class="hidden md:flex items-center bg-action-orange text-white px-4 py-2 rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all">
+                    Nuevo Proyecto
+                </button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-outline-variant">
+<img alt="Avatar" class="" data-alt="A professional headshot of a young creative professional with a friendly expression. The lighting is bright and clean, reflecting a modern light-mode UI aesthetic. The background is a soft, out-of-focus studio setting with warm wooden accents and tech-oriented decor, emphasizing a maker culture atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcxvfE35oQt-fsZuaWv2FbZcg_McDuyB9QWKg3vDh0Ch5LbMcAz2p8DuYjDpGbjjR_2zdmDCn25-66kT1LNAZJCi_6D6vVxBRJsEXb-HhGlwbtwzfr7tfqbLGg-Tp7NW17-yysHEUKzKwqsGUdVUBgORQd4dwD8j4e4_E7ZpgFQPYjbOWJPh0oczwfUH12g9xXYB2fz-2llyHAgQWlRNwliZQ4plr2pq6JRoA5pG1pVtek2saXLh-B5yOPcPI0Sl8fcxBa8Xso2cbp">
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop py-stack-lg">
+<!-- Hero Section -->
+<section class="mb-12 relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-container to-primary p-8 md:p-12 text-on-primary-container shadow-lg">
+<div class="relative z-10 max-w-3xl">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4 text-white">Lineamientos del Proyecto</h1>
+<p class="font-body-lg text-body-lg text-white/90">Una guía diseñada para garantizar que cada taller de impresión 3D sea una experiencia segura, educativa y transformadora, tanto para los niños como para los voluntarios. En ella se presentan pautas y recomendaciones sobre los protocolos que deben respetarse durante las clases y talleres, junto con normas de convivencia orientadas a promover un ambiente de aprendizaje colaborativo, ordenado y respetuoso.</p>
+</div>
+<div class="absolute right-0 top-0 h-full w-1/3 opacity-20 hidden lg:block">
+<span class="material-symbols-outlined text-[240px] translate-x-1/2 -translate-y-1/4" style="font-variation-settings: &quot;FILL&quot; 1;">precision_manufacturing</span>
+</div>
+</section>
+<!-- Bento Grid Layout for Guidelines -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Pautas de Seguridad (Large Card) -->
+<div class="md:col-span-8 bg-white rounded-xl border border-blueprint-gray shadow-sm overflow-hidden border-t-2 border-tech-blue flex flex-col" style="transform: translateY(0px); transition: 0.3s;">
+<div class="p-6 md:p-8"><div class="flex items-center gap-3 mb-8">
+<div class="w-12 h-12 rounded-lg bg-tech-blue/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tech-blue text-3xl">health_and_safety</span>
+</div>
+<h2 class="font-headline-md text-headline-md">Pautas de Seguridad y Convivencia</h2>
+</div>
+<div class="grid grid-cols-1 gap-10">
+<!-- 1. Talleres de Ni   os -->
+<section class="space-y-4">
+<div class="flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-primary">child_care</span>
+<h3 class="font-bold text-lg">Taller de Niños</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="space-y-2 text-on-surface-variant text-sm">
+<p class=""><strong>Uso de Baños:</strong>&nbsp;Dos voluntarios, un varón y una mujer, acompañarán a los niños al baño durante el taller. Los traslados se realizarán siempre juntos, con un máximo de dos niños por vez y utilizando los baños asignados.</p>
+<p class=""><strong>Protocolo de Recreos:</strong>Los recreos durarán aproximadamente 15 minutos y estarán supervisados por voluntarios, quienes controlarán los accesos para garantizar la seguridad. Al finalizar, se acompañará a los niños al aula y se verificará la asistencia.</p>
+</div>
+<div class="bg-primary-fixed-dim/20 p-4 rounded-lg text-sm border-l-4 border-action-orange">
+<strong>Regla de Oro:</strong> Tener precaucion extrema al usar los lapices de impresion 3D para evitar quemaduras.
+            </div>
+</div>
+</section>
+<!-- 2. Creaci   on de Contenido e Impresi   on de Piezas -->
+<section class="space-y-4">
+<div class="flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+<h3 class="font-bold text-lg">Creación de Contenido e Impresión de Piezas</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xs mt-1">verified</span> Precauciones rigurosas en el uso fisico de la impresora.</li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-xs mt-1">verified</span> Programacion responsable de parametros.</li>
+</ul>
+</div>
+</section>
+<!-- 3. Convivencia y Espacios -->
+<section class="space-y-4">
+<div class="flex items-center gap-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-primary">groups</span>
+<h3 class="font-bold text-lg">Convivencia y Espacios</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600">cleaning_services</span>
+</div>
+<p class="text-sm">Limpieza constante de los espacios de trabajo.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-tech-blue">reorder</span>
+</div>
+<p class="text-sm">Orden y respeto en la convivencia general del taller.</p>
+</div>
+</div>
+<div class="grid md:grid-cols-1 mt-4">
+<div class="flex items-center gap-3 p-4 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-tech-blue">timer</span>
+<p class="text-sm font-medium">Respetar estrictamente el tiempo de recreo</p>
+</div>
+</div>
+</section>
+</div></div>
+<div class="mt-auto h-48 relative">
+<img alt="Modern 3D printer in action creating a detailed geometric part" class="w-full h-full object-cover" data-alt="A detailed view of a high-tech 3D printing workshop with clear safety signage in the background. The scene shows an organized workspace with printers enclosed in clean housings, bright neutral lighting, and a focused, professional maker environment. The color palette features whites, grays, and bright orange safety accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-MayvyMysh3uu68NO2Z4Pk9No0rB9dHF5DsR7X0rWxFfOehehr2ijIvokHWxsF3J88R-2bxOU62ZDf7UcTnx_X5sPjXiU2u2jvpdq5MlLmMW3Hub7P9yGKpG0xf0IIq2KMKaq5WzdOFq17Nzj_mD7JCtLPhmJ78iqMykbrZXP6uuCU1Fv1kF3kTKJHTszLs95LOiUapqmg7TeVZpJQOLBJLkUBa8Whe_EiM2ceOBEQVS9QLyiMpS3BATyfMrf_4MhYahFL6Wg12QZ">
+</div>
+</div>
+<!-- Side Info / Quick Actions -->
+<div class="md:col-span-4 space-y-6">
+<!-- Pedagogía Summary -->
+<div class="bg-secondary-container text-white p-6 rounded-xl shadow-md border-t-2 border-white/20"><div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-3xl">school</span>
+<h3 class="font-bold">Contenido Ampliado</h3>
+</div>
+<div class="space-y-2 mb-6">
+<div class="bg-white/10 p-3 rounded-lg border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+<p class="text-sm font-bold">1. Talleres de Niños</p>
+</div>
+<div class="bg-white/10 p-3 rounded-lg border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+<p class="text-sm font-bold">2. Creación de Contenido</p>
+</div>
+<div class="bg-white/10 p-3 rounded-lg border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+<p class="text-sm font-bold">3. Impresión de Piezas</p>
+</div>
+</div>
+<button class="bg-white text-secondary px-4 py-2 rounded-lg font-bold text-sm w-full hover:bg-opacity-90 transition-all" style="transform: translateY(0px); transition: 0.3s;">
+    -&gt;</button></div>
+<!-- Chips / Tags Section -->
+
+</div>
+<!-- Metodología Pedagógica -->
+<div class="md:col-span-6 bg-white rounded-xl border border-blueprint-gray shadow-sm p-6 md:p-8 border-t-2 border-tech-blue" style="transform: translateY(0px); transition: 0.3s;">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+</div>
+<h2 class="font-headline-md text-headline-md">Metodología De Clases</h2>
+</div>
+<div class="space-y-6"><div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-on-primary-fixed text-white flex items-center justify-center font-bold">1</div>
+<div>
+<h4 class="font-bold mb-1">Previo al comienzo del taller</h4>
+<p class="text-sm text-on-surface-variant">Se realizará la asistencia de los niños y la organización de los lugares dentro del aula. Al mismo tiempo, los voluntarios deberán preparar el espacio de trabajo y coordinar las tareas necesarias para el desarrollo de la jornada</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-on-primary-fixed text-white flex items-center justify-center font-bold">2</div>
+<div>
+<h4 class="font-bold mb-1">Primer módulo (teórico)</h4>
+<p class="text-sm text-on-surface-variant">Durante esta etapa se dictará la parte teórica del taller junto con una breve introducción a las actividades prácticas. Mientras se desarrolla la clase, algunos voluntarios deberán verificar que el área de lápices y materiales se encuentre preparada para las actividades posteriores.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-on-primary-fixed text-white flex items-center justify-center font-bold">3</div>
+<div>
+<h4 class="font-bold mb-1">Segundo módulo (actividades prácticas)</h4>
+<p class="text-sm text-on-surface-variant mb-2">En caso de superar la cantidad prevista de niños, se dividirán en grupos para realizar las actividades de manera rotativa.</p>
+<ul class="space-y-2 list-disc list-inside text-sm text-on-surface-variant">
+<li class=""><strong>Actividad Tinkercad:</strong>  los niños diseñarán un llavero en Tinkercad, mientras los voluntarios acompañarán y asistirán ante cualquier dificultad.</li>
+<li class=""><strong>Juego interactivo (Kahoot o Quizziz):</strong> se realizará una actividad lúdica de preguntas y respuestas. Los voluntarios deberán preparar previamente los premios correspondientes</li>
+<li class=""><strong>Actividad de lápices:</strong>&nbsp;los niños realizarán dibujos utilizando hojas y lápices provistos. Los voluntarios supervisarán la actividad y controlarán el uso seguro de los materiales.</li>
+</ul>
+<p class="text-xs mt-2 italic text-on-surface-variant">En caso de trabajar con grupos, las actividades de Tinkercad y lápices se intercambiarán para que todos los niños puedan participar de ambas propuestas.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-on-primary-fixed text-white flex items-center justify-center font-bold">4</div>
+<div>
+<h4 class="font-bold mb-1">Cierre y retiro de los niños</h4>
+<p class="text-sm text-on-surface-variant">Al finalizar el taller, se verificará la asistencia y se procederá al retiro de los niños únicamente en presencia de su padre, madre o tutor responsable.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-on-primary-fixed text-white flex items-center justify-center font-bold">5</div>
+<div>
+<h4 class="font-bold mb-1">Registro de incidentes</h4>
+<p class="text-sm text-on-surface-variant">Ante cualquier imprevisto, problema o conflicto ocurrido durante la jornada, los voluntarios deberán registrarlo el mismo día para dejar constancia de la situación y su resolución.</p>
+</div>
+</div></div>
+</div>
+<!-- Comunicación y Registro -->
+<div class="md:col-span-6 bg-surface-container-low rounded-xl border border-blueprint-gray shadow-sm overflow-hidden flex flex-col">
+<div class="p-6 md:p-8">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-lg bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary text-3xl">rate_review</span>
+</div>
+<h2 class="font-headline-md text-headline-md">Comunicación y Registro</h2>
+</div>
+<div class="space-y-4">
+<p class="text-on-surface-variant">Durante los talleres pueden surgir fallos o situaciones imprevistas. En esta sección se registrarán los problemas detectados y las soluciones aplicadas, para que puedan consultarse.</p>
+<div class="grid grid-cols-1 gap-3">
+<div class="bg-white p-4 rounded-lg flex items-center justify-between border border-outline-variant hover:border-primary transition-colors cursor-pointer group" style="transform: translateY(0px); transition: 0.3s;">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">bug_report</span>
+<div>
+<p class="font-bold text-sm">Reporte de Fallas Técnicas</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="bg-white p-4 rounded-lg flex items-center justify-between border border-outline-variant hover:border-primary transition-colors cursor-pointer group" style="transform: translateY(0px); transition: 0.3s;">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">photo_camera</span>
+<div>
+<p class="font-bold text-sm">Evidencia para Boletín</p>
+<p class="text-xs text-on-surface-variant">Sube fotos y testimonios .</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto p-6 bg-white border-t border-blueprint-gray" style="transform: translateY(0px); transition: 0.3s;">
+<p class="text-xs text-center text-on-surface-variant italic font-medium">
+                        "Documentar lo que hacemos es tan importante como hacerlo." — Equipo de Coordinación
+                    </p>
+</div>
+</div>
+</div>
+<!-- Sticky Progress Bar or Quick Tip (Optional UI Element) -->
+<div class="mt-12 p-6 bg-primary-fixed-dim/20 rounded-xl border-2 border-dashed border-primary/30 flex flex-col md:flex-row items-center gap-6">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-5xl text-primary" style="font-variation-settings: &quot;FILL&quot; 1;">lightbulb</span>
+</div>
+<div>
+<h4 class="font-headline-md text-primary mb-2">¿Tienes dudas sobre un caso específico?</h4>
+<p class="text-on-surface-variant">Si te encuentras en una situación que no está cubierta por estos lineamientos, consulta con tu Coordinador Regional antes de actuar o escríbenos por el canal de Slack #ayuda-voluntarios.</p>
+</div>
+<button class="md:ml-auto whitespace-nowrap bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-action-orange transition-colors shadow-md">
+                Contactar Coordinador
+            </button>
+</div>
+</main>
+<!-- Spacer for BottomNavBar on mobile -->
+<div class="h-24 md:hidden"></div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4 bg-surface dark:bg-surface-container-lowest border-t border-blueprint-gray dark:border-outline shadow-lg z-50 md:hidden rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1" href="index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1" href="recursos.html">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-sm text-label-sm">Recursos</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed text-on-primary-container dark:text-on-primary-fixed rounded-xl px-4 py-1 transform scale-90" href="lineamientos.html">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">newspaper</span>
+<span class="font-label-sm text-label-sm">Lineamientos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Perfil</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction: Smooth hover effect for cards
+        document.querySelectorAll('.bg-white').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('shadow-md');
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.3s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('shadow-md');
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Simple active state simulation for nav
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // If it was a real app, we'd handle routing here
+            });
+        });
+    </script>
+
+
+</body></html>

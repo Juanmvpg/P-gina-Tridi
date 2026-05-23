@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="es" style=""><head><link class="" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Centro Operativo - Tridimensionando Ideas</title>
+<!-- Fonts: Sora from Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#fc4c00',
+              dark: '#e04300',
+            },
+            surface: {
+              DEFAULT: '#fcf9f3',
+              dim: '#dcdad4',
+              bright: '#fcf9f3',
+              lowest: '#ffffff',
+              low: '#f6f3ed',
+              container: '#eceae4'
+            }
+          },
+          fontFamily: {
+            sora: ['Sora', 'sans-serif'],
+          },
+          borderRadius: {
+            'eight': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Sora', sans-serif;
+      background-color: #fcf9f3;
+      color: #1a1a1a;
+    }
+  </style>
+  <meta name="url-newsletter" content="%URL_NEWSLETTER%">
+  <meta name="url-tinkercad" content="%URL_TINKERCAD%">
+  <meta name="url-filminas" content="%URL_FILMINAS%">
+</head>
+<body class="min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<!-- Logo -->
+<div class="flex-shrink-0 flex items-center">
+<span class="text-brand font-extrabold text-xl tracking-tight">Tridimensionando Ideas</span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex space-x-8 items-center">
+<a class="flex items-center text-brand font-semibold px-1 pt-1 border-b-2 border-brand text-sm" href="index.html">
+<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+            Inicio
+          </a>
+<a class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium" href="recursos.html">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Recursos
+          </a>
+<a class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium" href="lineamientos.html">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Lineamientos
+          </a>
+</nav>
+<!-- User Profile -->
+<div class="flex items-center">
+<button class="bg-gray-200 rounded-full h-8 w-8 flex items-center justify-center overflow-hidden border border-gray-300">
+<img alt="User avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvJEGQlVPDbQoVGdKpE7GW_a_FJSEZfsGIxOUr26APTtvnPwQNQp5w7SRk3wCtIbX2-A6svIdx42Xc7V-YRVeOf50WSJ6HaWB9n-eeVPXCHnS3jSvjjt-C2-VvWzjkcXTqWuQs0v-MGwWpV2KZ9Opzd3Bbv_Zr7ahl5bSn3EsEq5UvhHO9i7uK0B6NKe2kW89KNCkCPwNU3YuR0WXHFHIUnHZ3ONeJCBCVAMcyuPZMQ0JS_CJlx3xVqmFV7G5OSnsh7krT0xWa8DUZ">
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+<!-- BEGIN: HeroSection -->
+<section class="relative bg-surface-container rounded-eight overflow-hidden p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center" data-purpose="hero-section">
+<div class="flex-1 space-y-6 z-10">
+<!-- Badge -->
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold">
+<svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
+          Sistema Activo
+        </div>
+<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Bitácora del taller</h1>
+<p class="text-lg text-gray-600 max-w-xl leading-relaxed">Un newsletter que documenta el recorrido del taller desde una mirada de mejora continua: <br>- Problemas detectados en cada jornada, decisiones tomadas y soluciones implementadas para optimizar la experiencia de aprendizaje. <br>- Un registro del trabajo colaborativo detrás de cada desafío en impresión 3D.</p>
+<a href="#" id="btn-newsletter" target="_blank" class="w-max bg-brand hover:bg-brand-dark text-white font-bold py-3 px-6 rounded-eight flex items-center transition-colors">
+<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+          Newsletter Semanal
+        </a>
+</div>
+<!-- Hero Illustration -->
+<div class="mt-8 md:mt-0 md:ml-8 relative">
+<div class="w-64 h-64 md:w-80 md:h-80 bg-white shadow-2xl rounded-eight flex items-center justify-center transform rotate-3 relative">
+<img alt="3D Cube Illustration" class="w-40 h-40 object-contain" id="hero-cube-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJEzT_Liz6FWyU3GiyzEp0B5L1shStyqP7tTc3Iemm9nkBlVrfHQYDCpMcpz6Sg7boHRkZwtkX8F4JJTKrDMXvnFZTgvleLew0dAgDpSN8vMy3e9ax6TU7JjnTwu6FLpBVDbDhqpga-H599Otp9A_ccrHDNBESupr3oSW57NdZCYVOrQdaq_AjU3ZXpkSCSjZll_Q9fw-k-e--x-iS5h50YR8wBTFNsnqMShffQbQmgl1ksHcLszJur8dBnD6625aiDyq8ylsu4Oc">
+<!-- Floating UI Element -->
+<div class="absolute -bottom-4 -right-4 bg-blue-500 text-white p-3 rounded-eight shadow-lg transform -rotate-3">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: OnboardingSection -->
+<section class="space-y-6" data-purpose="onboarding-section">
+<div class="flex justify-between items-end border-b border-gray-200 pb-2">
+<h2 class="text-2xl font-bold flex items-center text-gray-800"><span class="mr-2 material-symbols-outlined text-3xl" data-stitch-orig-opacity="0">deployed_code</span>Punto de partida</h2>
+<span class="text-[10px] font-bold text-gray-400 tracking-widest uppercase">Onboarding Express</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white border border-gray-100 rounded-eight p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+<div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 mb-6">
+<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3.005 3.005 0 013.75-2.906z"></path></svg>
+</div>
+<h3 class="text-xl font-bold mb-4">Cómo trabajamos</h3>
+<p class="text-gray-600 mb-8 flex-grow">Todo sobre tu rol en el equipo. Encontrá cómo funcionamos y los comportamientos esperados para que los talleres sean un éxito.</p>
+<a class="text-blue-500 font-semibold flex items-center text-sm hover:underline" href="lineamientos.html">Ver guía<svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+<!-- Card 2 -->
+<div class="bg-white border border-gray-100 rounded-eight p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+<div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 mb-6">
+<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.822a.75.75 0 00-.788 0l-7 4.2a.75.75 0 000 1.289l.43.258v5.601a.75.75 0 00.75.75h4a.75.75 0 00.75-.75v-3.5a.25.25 0 01.25-.25h1.5a.25.25 0 01.25.25v3.5a.75.75 0 00.75.75h4a.75.75 0 00.75-.75V8.569l.43-.258a.75.75 0 000-1.289l-7-4.2z"></path></svg>
+</div>
+<h3 class="text-xl font-bold mb-4">Cómo es un taller</h3>
+<p class="text-gray-600 mb-8 flex-grow">Sesiones dinámicas donde somos facilitadores. Los alumnos modelan en Tinkercad y nosotros los guiamos en el proceso técnico y creativo.</p>
+<a class="text-blue-500 font-semibold flex items-center text-sm hover:underline" href="#">
+            Ver dinámica <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+<!-- Card 3 -->
+<div class="bg-white border border-gray-100 rounded-eight p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+<div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-500 mb-6">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold mb-4">Caja de herramientas</h3>
+<p class="text-gray-600 mb-8 flex-grow">Tu centro de recursos. Material de clase, capacitaciones de software 3D, archivos STL y guías técnicas para resolver problemas de impresión.</p>
+<a class="text-blue-500 font-semibold flex items-center text-sm hover:underline" href="recursos.html">
+            Ver recursos <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</div>
+</section>
+<!-- END: OnboardingSection -->
+<!-- BEGIN: ToolsAndResources -->
+<section class="space-y-6" data-purpose="tools-section">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Large Tool Card -->
+<div class="lg:col-span-2 bg-surface-container rounded-eight p-8 relative flex flex-col justify-between overflow-hidden group h-80 lg:h-auto md:flex-row items-center"><div class="z-10">
+<div class="w-12 h-12 bg-brand rounded-eight flex items-center justify-center text-white mb-6">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-2xl font-bold mb-4">Espacio TinkerCAD</h3>
+<p class="text-gray-600 max-w-md">
+              Acceso directo al entorno de modelado 3D de las clases. Entrá al aula virtual y revisá los diseños de los alumnos en tiempo real.
+            </p>
+<a id="btn-tinkercad" target="_blank" class="mt-6 text-brand font-semibold flex items-center text-sm hover:underline" href="#">
+  Entrar al aula
+  <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a></div>
+<div class="w-32 h-32 md:w-48 md:h-48 flex-shrink-0 flex items-center justify-center z-10">
+<img alt="Tinkercad Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANl5aSjONcKclUQ5vShBJOY12ovoOxv00FUIPcKnQp9PZvs7L0pYd3Fhh4ppqAFaFT3Smd-6D7lvrjS87eeVoo0nJVUMf8NNswpS6G_vSiqaBu-15vztSxUPGhzmZb7Ndf-n5XiOncO5pewWdI0w17IOs5BBmYjQeHt-4ifHxDWUkkSU1NckhKV0N10Xc6NksOwPhcVh1sQhFufYv_r1Atk6-vLYPz0bI7zgqS7-3BzMeYeB0aQKlG_lHL1w2uyqkVb-oFv9niI0Q">
+</div></div>
+<!-- Secondary Resource Card -->
+<div class="border rounded-eight p-8 shadow-sm flex flex-col justify-between bg-surface-container">
+<div>
+<h3 class="text-xl font-bold mb-2 mb-4">Filminas actualizadas</h3>
+<p class="text-gray-500 text-sm">Presentaciones estandarizadas para usar durante los talleres.</p>
+<a id="btn-filminas" target="_blank" class="mt-4 text-brand font-semibold flex items-center text-sm hover:underline" href="#">
+  Ver filminas
+  <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a></div>
+</div>
+<!-- Small Resource Card -->
+<div class="border rounded-eight p-8 shadow-sm flex flex-col justify-between bg-surface-container">
+<div class="">
+<h3 class="text-xl font-bold mb-2">¿Problemas al imprimir?</h3>
+<p class="text-gray-500 text-sm mb-4">Guías de resolución de problemas comunes en las impresoras.</p>
+
+<a class="mt-4 text-brand font-semibold flex items-center text-sm hover:underline" href="recursos.html">Buscar solución<svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a></div>
+</div>
+<!-- Featured Projects Gallery -->
+
+</div>
+</section>
+<!-- END: ToolsAndResources -->
+</main>
+
+
+
+
+
+<script>
+  function applyUrl(metaName, btnId, defaultUrl) {
+    const meta = document.querySelector(`meta[name="${metaName}"]`);
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    if (meta && meta.content && !meta.content.includes('%')) {
+      btn.href = meta.content;
+    } else {
+      btn.href = defaultUrl;
+    }
+  }
+  // Se proveen las URLs por defecto que me diste por si Netlify no las reemplaza aún
+  applyUrl('url-newsletter', 'btn-newsletter', 'https://proyectotridi.my.canva.site/');
+  applyUrl('url-tinkercad', 'btn-tinkercad', 'https://www.tinkercad.com/');
+  applyUrl('url-filminas', 'btn-filminas', 'https://canva.link/kuge1m3si5tnzl6');
+</script>
+</body></html>
