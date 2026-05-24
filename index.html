@@ -353,12 +353,10 @@
   
   let clickCount = 0;
   let clickTimer = null;
-  let confettiTriggered = false;
+  let requiredClicks = 7;
+  const maxRequiredClicks = 50;
 
   function triggerConfetti() {
-    if (confettiTriggered) return;
-    confettiTriggered = true;
-    
     const rect = heroImageContainer.getBoundingClientRect();
     const colors = ['#fc4c00', '#138eff', '#ffcd00', '#00e676', '#ea1e63'];
     
@@ -402,6 +400,11 @@
       }
       requestAnimationFrame(update);
     }
+
+    // Scale up the required clicks count for the next launch
+    if (requiredClicks < maxRequiredClicks) {
+      requiredClicks = Math.min(requiredClicks + 5, maxRequiredClicks);
+    }
   }
 
   if (heroImageContainer && floatingBadge) {
@@ -419,18 +422,16 @@
         floatingBadge.classList.add('-rotate-3');
       }
 
-      // Click-spam easter egg (7 rapid clicks, max 200ms gap between each)
-      if (!confettiTriggered) {
-        clickCount++;
-        clearTimeout(clickTimer);
-        clickTimer = setTimeout(() => {
-          clickCount = 0;
-        }, 200);
+      // Click-spam easter egg (requiredClicks rapid clicks, max 200ms gap between each)
+      clickCount++;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => {
+        clickCount = 0;
+      }, 200);
 
-        if (clickCount >= 7) {
-          triggerConfetti();
-          clickCount = 0;
-        }
+      if (clickCount >= requiredClicks) {
+        triggerConfetti();
+        clickCount = 0;
       }
     });
   }
