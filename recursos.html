@@ -204,6 +204,27 @@
             <p class="text-[10px] text-gray-400 font-medium tracking-tight">© 2026 Tridimensionando Ideas. Diseñado por voluntarios del proyecto.</p>
         </div>
     </footer>
+    <!-- Spacer for BottomNavBar on mobile -->
+    <div class="h-24 md:hidden"></div>
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4 bg-surface border-t border-gray-200 shadow-lg z-50 md:hidden rounded-t-xl">
+      <a class="flex flex-col items-center justify-center text-gray-500 px-4 py-1.5" href="index.html">
+        <span class="material-symbols-outlined mb-0.5">home</span>
+        <span class="font-label-sm text-[10px] font-medium">Inicio</span>
+      </a>
+      <a class="flex flex-col items-center justify-center bg-[#fc4c00] text-white rounded-xl px-4 py-1.5 transform scale-90" href="recursos.html">
+        <span class="material-symbols-outlined mb-0.5" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+        <span class="font-label-sm text-[10px] font-bold">Recursos</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-gray-500 px-4 py-1.5" href="lineamientos.html">
+        <span class="material-symbols-outlined mb-0.5">newspaper</span>
+        <span class="font-label-sm text-[10px] font-medium">Lineamientos</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-gray-500 px-4 py-1.5" href="#">
+        <span class="material-symbols-outlined mb-0.5">person</span>
+        <span class="font-label-sm text-[10px] font-medium">Perfil</span>
+      </a>
+    </nav>
 
     <script>
       function applyUrl(metaName, btnId, defaultUrl) {
