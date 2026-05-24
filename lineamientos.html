@@ -22,33 +22,42 @@
             grid-template-columns: repeat(12, 1fr);
             gap: 24px;
         }
+        .nav-link {
+            font-family: 'Inter', sans-serif;
+        }
     </style>
   <meta name="url-contenido-completo" content="%URL_CONTENIDO_COMPLETO%">
 </head>
 <body class="font-body-md text-body-md">
-<!-- TopAppBar -->
-<header class="bg-surface-container dark:bg-surface-dim border-b border-outline-variant dark:border-outline shadow-sm docked full-width top-0 sticky z-50">
-<div class="flex justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop max-w-container-max mx-auto h-16">
-<div class="flex items-center gap-8">
-<span class="font-headline-md text-headline-md font-bold text-primary dark:text-action-orange">Tridimensionando Ideas</span>
-<nav class="hidden md:flex gap-6 items-center">
-<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:bg-surface-bright dark:hover:bg-surface-variant transition-colors px-3 py-2 rounded-lg" href="index.html">Inicio</a>
-<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:bg-surface-bright dark:hover:bg-surface-variant transition-colors px-3 py-2 rounded-lg" href="recursos.html">Recursos</a>
-<a class="text-primary dark:text-primary-fixed-dim font-bold border-b-2 border-primary px-3 py-2" href="lineamientos.html">Lineamientos</a>
-</nav>
-</div>
-<div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-bright p-2 rounded-full transition-colors">notifications</button>
-<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-bright p-2 rounded-full transition-colors">help_outline</button>
-<button class="hidden md:flex items-center bg-action-orange text-white px-4 py-2 rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all">
-                    Nuevo Proyecto
-                </button>
-<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-outline-variant">
-<img alt="Avatar" class="" data-alt="A professional headshot of a young creative professional with a friendly expression. The lighting is bright and clean, reflecting a modern light-mode UI aesthetic. The background is a soft, out-of-focus studio setting with warm wooden accents and tech-oriented decor, emphasizing a maker culture atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcxvfE35oQt-fsZuaWv2FbZcg_McDuyB9QWKg3vDh0Ch5LbMcAz2p8DuYjDpGbjjR_2zdmDCn25-66kT1LNAZJCi_6D6vVxBRJsEXb-HhGlwbtwzfr7tfqbLGg-Tp7NW17-yysHEUKzKwqsGUdVUBgORQd4dwD8j4e4_E7ZpgFQPYjbOWJPh0oczwfUH12g9xXYB2fz-2llyHAgQWlRNwliZQ4plr2pq6JRoA5pG1pVtek2saXLh-B5yOPcPI0Sl8fcxBa8Xso2cbp">
-</div>
-</div>
-</div>
-</header>
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-[#fc4c00] font-extrabold text-xl tracking-tight font-sora">Tridimensionando Ideas</span>
+                </div>
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">home</span>
+                        Inicio
+                    </a>
+                    <a href="recursos.html" class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">inventory_2</span>
+                        Recursos
+                    </a>
+                    <a href="lineamientos.html" class="flex items-center text-[#fc4c00] font-semibold px-1 pt-1 border-b-2 border-[#fc4c00] text-sm nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">description</span>
+                        Lineamientos
+                    </a>
+                </nav>
+                <!-- Profile (Removed, kept spacing wrapper to center nav) -->
+                <div class="flex items-center w-8 h-8">
+                </div>
+            </div>
+        </div>
+    </header>
 <main class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop py-stack-lg">
 <!-- Hero Section -->
 <section class="mb-12 relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-container to-primary p-8 md:p-12 text-on-primary-container shadow-lg">

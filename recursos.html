@@ -1,261 +1,236 @@
-<!DOCTYPE html><html class="light" lang="es" style=""><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Recursos - Tridimensionando Ideas</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "primary": "#fc4c00",
-                    "on-primary": "#ffffff",
-                    "primary-container": "#ffdbd0",
-                    "on-primary-container": "#3a0b00",
-                    "secondary": "#005cab",
-                    "on-secondary": "#ffffff",
-                    "secondary-container": "#d4e3ff",
-                    "on-secondary-container": "#001c3a",
-                    "tertiary": "#005cad",
-                    "on-tertiary": "#ffffff",
-                    "tertiary-container": "#d5e3ff",
-                    "on-tertiary-container": "#001c3b",
-                    "error": "#ba1a1a",
-                    "on-error": "#ffffff",
-                    "error-container": "#ffdad6",
-                    "on-error-container": "#410002",
-                    "background": "#fcf9f3",
-                    "on-background": "#1c1c18",
-                    "surface": "#fcf9f3",
-                    "on-surface": "#1c1c18",
-                    "surface-variant": "#e5e2dc",
-                    "on-surface-variant": "#5c4038",
-                    "outline": "#916f66",
-                    "outline-variant": "#e6beb2",
-                    "surface-container-lowest": "#ffffff",
-                    "surface-container-low": "#f6f3ed",
-                    "surface-container": "#f0eee8",
-                    "surface-container-high": "#ebe8e2",
-                    "surface-container-highest": "#e5e2dc",
-                    "action-orange": "#fc4c00",
-                    "carbon-black": "#1A1A1A",
-                    "tech-blue": "#138EFF",
-                    "blueprint-gray": "#E2E8F0"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.5rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "stack-sm": "8px",
-                    "gutter-desktop": "24px",
-                    "base": "8px",
-                    "stack-lg": "32px",
-                    "gutter-mobile": "16px",
-                    "stack-md": "16px",
-                    "container-max": "1280px"
-            },
-            "fontFamily": {
-                    "label-md": ["Inter"],
-                    "label-sm": ["Inter"],
-                    "headline-lg": ["Sora"],
-                    "body-lg": ["Sora"],
-                    "headline-lg-mobile": ["Sora"],
-                    "headline-md": ["Sora"],
-                    "display-lg": ["Sora"],
-                    "body-md": ["Sora"]
-            },
-            "fontSize": {
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos - Tridimensionando Ideas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#FC4C00', // Action Orange
+                            tech: '#138EFF',    // Tech Blue
+                        },
+                        surface: {
+                            DEFAULT: '#FCF9F3', // Workshop White
+                            container: '#F0EEE8',
+                            low: '#F6F3ED'
+                        },
+                        outline: '#916F66',
+                        'blueprint-gray': '#E2E8F0'
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "radial-gradient(circle, #D1D5DB 1px, transparent 1px)",
+                    }
+                }
             }
-          },
-        },
-      }
+        }
     </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FCF9F3;
+            background-image: 
+                linear-gradient(to right, #E2E8F0 1px, transparent 1px),
+                linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-attachment: fixed;
         }
-        .icon-fill {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        h1, h2, h3, .font-sora {
+            font-family: 'Sora', sans-serif;
         }
-        .bg-blueprint-pattern {
-            background-image: linear-gradient(to right, rgba(226, 232, 240, 0.4) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(226, 232, 240, 0.4) 1px, transparent 1px);
-            background-size: 24px 24px;
+        .nav-link {
+            font-family: 'Inter', sans-serif;
         }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(to right, #E2E8F0 1px, transparent 1px),
+                linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+            background-size: 40px 40px;
         }
     </style>
-  <meta name="url-videotutoriales" content="%URL_VIDEOTUTORIALES%">
-  <meta name="url-presentaciones" content="%URL_PRESENTACIONES%">
+    <meta name="url-videotutoriales" content="%URL_VIDEOTUTORIALES%">
+    <meta name="url-presentaciones" content="%URL_PRESENTACIONES%">
 </head>
-<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0 font-body-md antialiased bg-blueprint-pattern">
-<!-- TopAppBar -->
-<header class="bg-surface-container shadow-sm border-b border-outline-variant w-full h-16 fixed top-0 z-50">
-<div class="flex justify-between items-center w-full px-gutter-mobile md:px-gutter-desktop max-w-container-max mx-auto h-full"><div class="flex items-center w-full px-gutter-mobile md:px-gutter-desktop max-w-container-max mx-auto h-full">
-<div class="flex-1 flex justify-start">
-<div class="font-headline-md text-[18px] md:text-headline-md font-bold text-action-orange truncate text-[#fc4c00]">
-            Tridimensionando Ideas
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-brand font-extrabold text-xl tracking-tight font-sora">Tridimensionando Ideas</span>
+                </div>
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">home</span>
+                        Inicio
+                    </a>
+                    <a href="recursos.html" class="flex items-center text-brand font-semibold px-1 pt-1 border-b-2 border-brand text-sm nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">inventory_2</span>
+                        Recursos
+                    </a>
+                    <a href="lineamientos.html" class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">description</span>
+                        Lineamientos
+                    </a>
+                </nav>
+                <!-- Profile (Gray circle removed, kept spacing wrapper) -->
+                <div class="flex items-center w-8 h-8">
+                </div>
+            </div>
         </div>
-</div>
-<nav class="hidden md:flex gap-4 h-full items-center justify-center"><a class="text-on-surface-variant font-medium transition-colors h-full flex items-center px-4 font-label-md text-label-md hover:text-tertiary" href="index.html">Inicio</a><a class="font-bold border-b-2 h-full flex items-center px-4 font-label-md text-label-md text-primary border-primary" href="recursos.html">Recursos</a><a class="text-on-surface-variant font-medium transition-colors h-full flex items-center px-4 font-label-md text-label-md hover:text-tertiary" href="lineamientos.html">Lineamientos</a></nav>
-<div class="flex-1 flex justify-end items-center">
-<button class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
-</button>
-</div>
-</div></div>
-</header>
-<!-- Main Content -->
-<main class="max-w-container-max mx-auto px-gutter-mobile md:px-gutter-desktop pt-24 md:pt-28 pb-12">
-<!-- Header Section -->
-<div class="mb-stack-lg">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg mb-stack-sm text-on-surface">Centro de Recursos</h1>
-<p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant max-w-2xl">
-                Todo el material de apoyo centralizado para tus clases. Accedé a los videotutoriales de Tinkercad, descargá las filminas para proyectar, bajá los archivos STL listos y consultá la guía de soluciones rápidas.
-            </p>
-</div>
-<!-- Filters Section -->
-<div class="flex overflow-x-auto pb-4 mb-stack-md gap-3 hide-scrollbar w-full -mx-gutter-mobile px-gutter-mobile md:mx-0 md:px-0">
-</div>
-<!-- Resources Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter-mobile md:gap-gutter-desktop mb-stack-lg">
-<!-- Card 1: Curso Tinkercad -->
-<div class="bg-surface-container-lowest rounded-lg shadow-sm border border-blueprint-gray border-t-2 border-t-action-orange overflow-hidden group hover:shadow-md transition-all duration-300 flex flex-col h-full border-t-[#fc4c00]">
-<div class="h-48 w-full relative overflow-hidden bg-surface-container-high">
-<img alt="Curso Tinkercad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2HN2N1UmP4pv-ctZmKV17vJiZoIfUTkt9GFjMuw7pHUsF0IO-6mWPOyP-nWU01KhrVllH--rxlI8o-sy0QgAYvsHZZc-luDjUiUih61UpWscqbrSEOvyRPXpP_TZWapiO9E6sg1bjzFzoJlK-ezr_mXI2ArRfiIIOcPTobv_ILtDi6dX3SFCtTFzfgl0cFBOm_a0vQ7gPH54ZOyqV6thprDhglBvLvf5zkC5rjdLyxqus-oiZU1yc_Q5xH7pv5h3CDLtHLvEdjLEb">
-<div class="absolute top-3 left-3">
-<span class="font-label-sm text-label-sm px-2 py-1 rounded shadow-sm flex items-center border border-tertiary bg-white/80 text-tertiary"><span class="material-symbols-outlined text-[14px] mr-1">school</span>Educación</span>
-</div>
-</div>
-<div class="p-4 md:p-5 flex flex-col flex-grow">
-<h3 class="font-headline-md text-[20px] leading-tight text-carbon-black mb-2 font-bold group-hover:text-action-orange transition-colors group-hover:text-[#fc4c00]">Videotutoriales: Tinkercad</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">
-                        Aprendé el paso a paso del modelado 3D con nuestra serie de videos. Ideal para repasar antes de dar el taller.
-                    </p>
-<div class="flex justify-between items-center mt-auto pt-4 border-t border-blueprint-gray">
-<a href="#" id="btn-videotutoriales" target="_blank" class="text-action-orange font-label-md text-label-md font-bold flex items-center hover:opacity-80 transition-opacity text-[#fc4c00]">
-                            Iniciar
-                            <span class="material-symbols-outlined ml-1 text-[18px]">arrow_forward</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Card 2: Filminas de Talleres -->
-<div class="bg-surface-container-lowest rounded-lg shadow-sm border border-blueprint-gray border-t-2 border-t-action-orange overflow-hidden group hover:shadow-md transition-all duration-300 flex flex-col h-full border-t-[#fc4c00]">
-<div class="h-48 w-full relative overflow-hidden bg-surface-container-high flex items-center justify-center">
-<div class="absolute inset-0 bg-primary opacity-5"></div>
-<span class="material-symbols-outlined text-[64px] text-action-orange opacity-40 text-[#fc4c00]">co_present</span>
-<div class="absolute top-3 left-3">
-<span class="font-label-sm text-label-sm px-2 py-1 rounded shadow-sm flex items-center border border-tertiary bg-white/80 text-tertiary"><span class="material-symbols-outlined text-[14px] mr-1">description</span>Documentos</span>
-</div>
-</div>
-<div class="p-4 md:p-5 flex flex-col flex-grow">
-<h3 class="font-headline-md text-[20px] leading-tight text-carbon-black mb-2 font-bold group-hover:text-action-orange transition-colors group-hover:text-[#fc4c00]">Presentaciones y Juegos</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">
-                        Descargá el material de apoyo visual para proyectar en el aula y los links de acceso a los juegos interactivos.
-                    </p>
-<div class="flex justify-between items-center mt-auto pt-4 border-t border-blueprint-gray"><a href="#" id="btn-presentaciones" target="_blank" class="text-action-orange font-label-md text-label-md font-bold flex items-center hover:opacity-80 transition-opacity text-[#fc4c00]"><span class="material-symbols-outlined mr-1 text-[18px]">folder</span>Archivos</a></div>
-</div>
-</div>
-<!-- Card 3: Repositorio -->
-<div class="bg-surface-container-lowest rounded-lg shadow-sm border border-blueprint-gray border-t-2 border-t-action-orange overflow-hidden group hover:shadow-md transition-all duration-300 flex flex-col h-full border-t-[#fc4c00]">
-<div class="h-48 w-full relative overflow-hidden bg-surface-container-high">
-<img alt="Repositorio 3D" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsqofzj-qXmANOIdjs3IzQGkNmlajeKCWSdGk1ZGC6yQohDb--8dHbJbdBd7-LmKovGvdoKlLHFGMGDXCVGGi2u1bq3KFkM1fcqKAP8xBIRXW9JSOSFdo1EQlVBb3hy9E9NdFTtVtsMytVr3OlrU_fCfiefTNUALmH-IQJaAwVynG8gqOI26XbhVkyDUF-CdVQs96ChIJLCHl971FtQREqtp4n46w4fIYI9L2HHm5TDetH9ygqj8QdKhAAmSczu07FFnC9OFYrTb0T">
-<div class="absolute top-3 left-3">
-<span class="font-label-sm text-label-sm px-2 py-1 rounded shadow-sm flex items-center border border-tertiary bg-white/80 text-tertiary"><span class="material-symbols-outlined text-[14px] mr-1">view_in_ar</span>Modelos STL</span>
-</div>
-</div>
-<div class="p-4 md:p-5 flex flex-col flex-grow">
-<h3 class="font-headline-md text-[20px] leading-tight text-carbon-black mb-2 font-bold group-hover:text-action-orange transition-colors group-hover:text-[#fc4c00]">Repositorio de Piezas</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">
-                        Colección curada de modelos 3D testeados y optimizados para impresión FDM sin soportes.
-                    </p>
-<div class="flex justify-between items-center mt-auto pt-4 border-t border-blueprint-gray">
-<span class="text-on-surface-variant font-label-md text-label-md font-bold flex items-center opacity-50">
-                            Próximamente
-                            <span class="material-symbols-outlined ml-1 text-[18px]">hourglass_top</span>
-</span>
-</div>
-</div>
-</div>
-<!-- Card 4: Troubleshooting -->
-<div class="bg-surface-container-lowest rounded-lg shadow-sm border border-blueprint-gray border-t-2 border-t-error overflow-hidden group hover:shadow-md transition-all duration-300 flex flex-col h-full">
-<div class="h-48 w-full relative overflow-hidden bg-error-container flex items-center justify-center">
-<span class="material-symbols-outlined text-[64px] text-error">build_circle</span>
-<div class="absolute top-3 left-3"><span class="font-label-sm text-label-sm px-2 py-1 rounded shadow-sm flex items-center border border-tertiary bg-white/80 text-tertiary"><span class="material-symbols-outlined text-[14px] mr-1">report_problem</span>Soporte</span></div>
-</div>
-<div class="p-4 md:p-5 flex flex-col flex-grow">
-<h3 class="font-headline-md text-[20px] leading-tight text-carbon-black mb-2 font-bold group-hover:text-error transition-colors">Guía de Resolución</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">
-                        Soluciones rápidas a problemas comunes: warping, stringing, atascos y errores de nivelación.
-                    </p>
-<div class="flex justify-between items-center mt-auto pt-4 border-t border-blueprint-gray">
+    </header>
 
-<span class="text-on-surface-variant font-label-md text-label-md font-bold flex items-center opacity-50">Próximamente<span class="material-symbols-outlined ml-1 text-[18px]">hourglass_top</span></span>
-</div>
-</div>
-</div>
-</div>
-</main>
-<!-- Floating Action Button -->
-<button aria-label="Ayuda y Soporte" class="fixed bottom-24 md:bottom-8 right-gutter-mobile md:right-gutter-desktop w-14 h-14 bg-action-orange text-on-primary rounded-full shadow-lg flex items-center justify-center hover:opacity-90 hover:scale-105 transition-all duration-200 z-40 group bg-[#fc4c00]">
-<span class="material-symbols-outlined text-[28px] icon-fill">help_center</span>
-<span class="absolute right-16 bg-carbon-black text-white font-label-sm text-label-sm px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none hidden md:block">
-            Ayuda y Soporte
-        </span>
-</button>
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden bg-surface-container fixed bottom-0 w-full z-50 border-t border-outline-variant shadow-lg left-0 flex justify-around items-center h-20 pb-safe px-4"><a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1" href="index.html">
-<span class="material-symbols-outlined mb-1">home</span>
-<span class="font-label-sm text-[10px]">Inicio</span>
-</a>
-<a class="flex flex-col items-center justify-center rounded-xl px-4 py-1 text-primary" href="recursos.html">
-<span class="material-symbols-outlined mb-1 icon-fill">inventory_2</span>
-<span class="font-label-sm text-[10px] font-bold">Recursos</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1" href="lineamientos.html">
-<span class="material-symbols-outlined mb-1">newspaper</span>
-<span class="font-label-sm text-[10px]">Lineamientos</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant px-3 py-1" href="#">
-<span class="material-symbols-outlined mb-1">person</span>
-<span class="font-label-sm text-[10px]">Perfil</span>
-</a></nav>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+        <!-- Hero Section -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Centro de Recursos</h1>
+            <p class="text-lg text-gray-600 max-w-2xl font-jakarta">Todo el material de apoyo centralizado para tus clases. Accedé a los videotutoriales de Tinkercad, descargá las filminas para proyectar, bajá los archivos STL listos y consultá la guía de soluciones rápidas.</p>
+        </div>
 
+        <!-- Filter Chips -->
+        <div class="flex flex-wrap gap-3 mb-10">
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">school</span> Cursos
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">description</span> Filminas
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">view_in_ar</span> Modelos 3D
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">construction</span> Troubleshooting
+            </button>
+        </div>
 
+        <!-- Resource Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+                <div class="relative h-48 overflow-hidden bg-gray-100">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3zY9Sq1lhUCUViEZciUDW6R0Dgc_YSNOVZ2gJUiodLeY2aDlt1kWl_W0eIGco4eug8bSTzVWt2uv1G9OCYVAcKXs-dbRSV6yOqMeJwWK5E9DhsBw55VKdPBJ0AT_4LL3C-s1iNc3KwsWlmBD3p-jiX_X0Qp2FC3_AqcIiqqdSM01zio3CC0bA2iGAlGJPvBC8VtPso-qk-EXURe1Zww1C8eWguF_GhFkW2mIpLTge7R0EblCZGPgw383AO791X3OvVp6cYd9jmTFP" alt="Curso Tinkercad" class="w-full h-full object-cover">
+                    <div class="absolute top-3 left-3 px-2 py-1 bg-white/80 backdrop-blur-sm rounded-md border border-brand-tech/20 flex items-center">
+                        <span class="material-symbols-outlined text-brand-tech text-sm mr-1">school</span>
+                        <span class="text-xs font-bold text-brand-tech font-inter">Educación</span>
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Videotutoriales: Tinkercad</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow font-jakarta">Aprendé el paso a paso del modelado 3D con nuestra serie de videos. Ideal para repasar antes de dar el taller.</p>
+                    <a href="#" id="btn-videotutoriales" target="_blank" class="text-brand font-bold flex items-center text-sm hover:underline">
+                        Iniciar <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
 
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+                <div class="relative h-48 bg-surface-container flex items-center justify-center">
+                    <span class="material-symbols-outlined text-outline text-6xl opacity-30">person</span>
+                    <div class="absolute top-3 left-3 px-2 py-1 bg-white/80 backdrop-blur-sm rounded-md border border-brand-tech/20 flex items-center">
+                        <span class="material-symbols-outlined text-brand-tech text-sm mr-1">description</span>
+                        <span class="text-xs font-bold text-brand-tech font-inter">Documentos</span>
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Presentaciones y Juegos</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow font-jakarta">Descargá el material de apoyo visual para proyectar en el aula y los links de acceso a los juegos interactivos.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <a href="#" id="btn-presentaciones" target="_blank" class="text-brand font-bold flex items-center text-sm hover:underline">
+                            <span class="material-symbols-outlined mr-1 text-sm">folder</span> Archivos
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-<script>
-  function applyUrl(metaName, btnId, defaultUrl) {
-    const meta = document.querySelector(`meta[name="${metaName}"]`);
-    const btn = document.getElementById(btnId);
-    if (!btn) return;
-    if (meta && meta.content && !meta.content.includes('%')) {
-      btn.href = meta.content;
-    } else {
-      btn.href = defaultUrl;
-    }
-  }
-  applyUrl('url-videotutoriales', 'btn-videotutoriales', 'https://drive.google.com/drive/folders/1O82aKVfCP3JqR8bUhE4y9Jy9My5HXZmu?usp=sharing');
-  applyUrl('url-presentaciones', 'btn-presentaciones', 'https://docs.google.com/document/d/133DJ-1A8vmaM4WfvWOOMq3ZHMEIoHd3sP47rxDQYvY8/edit?usp=sharing');
-</script>
-</body></html>
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuANl5aSjONcKclUQ5vShBJOY12ovoOxv00FUIPcKnQp9PZvs7L0pYd3Fhh4ppqAFaFT3Smd-6D7lvrjS87eeVoo0nJVUMf8NNswpS6G_vSiqaBu-15vztSxUPGhzmZb7Ndf-n5XiOncO5pewWdI0w17IOs5BBmYjQeHt-4ifHxDWUkkSU1NckhKV0N10Xc6NksOwPhcVh1sQhFufYv_r1Atk6-vLYPz0bI7zgqS7-3BzMeYeB0aQKlG_lHL1w2uyqkVb-oFv9niI0Q" alt="Repositorio" class="w-full h-full object-cover">
+                    <div class="absolute top-3 left-3 px-2 py-1 bg-white/80 backdrop-blur-sm rounded-md border border-brand-tech/20 flex items-center">
+                        <span class="material-symbols-outlined text-brand-tech text-sm mr-1">view_in_ar</span>
+                        <span class="text-xs font-bold text-brand-tech font-inter">Modelos STL</span>
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Repositorio de Piezas</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow font-jakarta">Colección curada de modelos 3D testeados y optimizados para impresión FDM sin soportes.</p>
+                    <div class="flex items-center mt-auto">
+                        <span class="text-gray-400 font-bold flex items-center text-sm opacity-50">
+                            Próximamente <span class="material-symbols-outlined ml-1 text-sm">hourglass_top</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+                <div class="relative h-48 bg-red-50 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-red-400 text-6xl opacity-30">report_problem</span>
+                    <div class="absolute top-3 left-3 px-2 py-1 bg-white/80 backdrop-blur-sm rounded-md border border-brand-tech/20 flex items-center">
+                        <span class="material-symbols-outlined text-brand-tech text-sm mr-1">report_problem</span>
+                        <span class="text-xs font-bold text-brand-tech font-inter">Soporte</span>
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Guía de Resolución</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow font-jakarta">Soluciones rápidas a problemas comunes: warping, stringing, atascos y errores de nivelación.</p>
+                    <div class="flex items-center mt-auto">
+                        <span class="text-gray-400 font-bold flex items-center text-sm opacity-50">
+                            Próximamente <span class="material-symbols-outlined ml-1 text-sm">hourglass_top</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-100 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-xs text-gray-400 font-medium tracking-tight">© 2024 Tridimensionando Ideas. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+      function applyUrl(metaName, btnId, defaultUrl) {
+        const meta = document.querySelector(`meta[name="${metaName}"]`);
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        if (meta && meta.content && !meta.content.includes('%')) {
+          btn.href = meta.content;
+        } else {
+          btn.href = defaultUrl;
+        }
+      }
+      applyUrl('url-videotutoriales', 'btn-videotutoriales', 'https://drive.google.com/drive/folders/1O82aKVfCP3JqR8bUhE4y9Jy9My5HXZmu?usp=sharing');
+      applyUrl('url-presentaciones', 'btn-presentaciones', 'https://docs.google.com/document/d/133DJ-1A8vmaM4WfvWOOMq3ZHMEIoHd3sP47rxDQYvY8/edit?usp=sharing');
+
+      // Micro-interaction: Smooth hover effect for cards and header
+      document.querySelectorAll('.bg-white').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('shadow-md');
+          card.style.transform = 'translateY(-2px)';
+          card.style.transition = 'all 0.3s ease';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('shadow-md');
+          card.style.transform = 'translateY(0px)';
+        });
+      });
+    </script>
+</body>
+</html>

@@ -60,23 +60,20 @@
 <!-- Navigation Links -->
 <nav class="hidden md:flex space-x-8 items-center">
 <a class="flex items-center text-brand font-semibold px-1 pt-1 border-b-2 border-brand text-sm" href="index.html">
-<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+<span class="material-symbols-outlined mr-2 text-lg">home</span>
             Inicio
           </a>
 <a class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium" href="recursos.html">
-<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="material-symbols-outlined mr-2 text-lg">inventory_2</span>
             Recursos
           </a>
 <a class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium" href="lineamientos.html">
-<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="material-symbols-outlined mr-2 text-lg">description</span>
             Lineamientos
           </a>
 </nav>
-<!-- User Profile -->
-<div class="flex items-center">
-<button class="bg-gray-200 rounded-full h-8 w-8 flex items-center justify-center overflow-hidden border border-gray-300">
-<img alt="User avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvJEGQlVPDbQoVGdKpE7GW_a_FJSEZfsGIxOUr26APTtvnPwQNQp5w7SRk3wCtIbX2-A6svIdx42Xc7V-YRVeOf50WSJ6HaWB9n-eeVPXCHnS3jSvjjt-C2-VvWzjkcXTqWuQs0v-MGwWpV2KZ9Opzd3Bbv_Zr7ahl5bSn3EsEq5UvhHO9i7uK0B6NKe2kW89KNCkCPwNU3YuR0WXHFHIUnHZ3ONeJCBCVAMcyuPZMQ0JS_CJlx3xVqmFV7G5OSnsh7krT0xWa8DUZ">
-</button>
+<!-- User Profile (Removed, kept spacing wrapper to center nav) -->
+<div class="flex items-center w-8 h-8">
 </div>
 </div>
 </div>
@@ -222,5 +219,18 @@
   applyUrl('url-newsletter', 'btn-newsletter', 'https://proyectotridi.my.canva.site/');
   applyUrl('url-tinkercad', 'btn-tinkercad', 'https://www.tinkercad.com/');
   applyUrl('url-filminas', 'btn-filminas', 'https://canva.link/kuge1m3si5tnzl6');
+
+  // Micro-interaction: Smooth hover effect for cards and header
+  document.querySelectorAll('.bg-white').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.classList.add('shadow-md');
+      card.style.transform = 'translateY(-2px)';
+      card.style.transition = 'all 0.3s ease';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('shadow-md');
+      card.style.transform = 'translateY(0px)';
+    });
+  });
 </script>
 </body></html>

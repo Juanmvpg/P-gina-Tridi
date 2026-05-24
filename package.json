@@ -1,0 +1,9 @@
+{
+  "name": "pagina-tridi",
+  "version": "1.0.0",
+  "description": "Sitio web estatico para Tridimensionando Ideas",
+  "scripts": {
+    "dev": "npx http-server -p 8080"
+  },
+  "dependencies": {}
+}
