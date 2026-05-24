@@ -104,6 +104,8 @@
             scrollbar-width: none;
         }
     </style>
+  <meta name="url-videotutoriales" content="%URL_VIDEOTUTORIALES%">
+  <meta name="url-presentaciones" content="%URL_PRESENTACIONES%">
 </head>
 <body class="bg-background text-on-background min-h-screen pb-24 md:pb-0 font-body-md antialiased bg-blueprint-pattern">
 <!-- TopAppBar -->
@@ -150,7 +152,7 @@
                         Aprendé el paso a paso del modelado 3D con nuestra serie de videos. Ideal para repasar antes de dar el taller.
                     </p>
 <div class="flex justify-between items-center mt-auto pt-4 border-t border-blueprint-gray">
-<a href="https://drive.google.com/drive/folders/1O82aKVfCP3JqR8bUhE4y9Jy9My5HXZmu?usp=sharing" target="_blank" class="text-action-orange font-label-md text-label-md font-bold flex items-center hover:opacity-80 transition-opacity text-[#fc4c00]">
+<a href="#" id="btn-videotutoriales" target="_blank" class="text-action-orange font-label-md text-label-md font-bold flex items-center hover:opacity-80 transition-opacity text-[#fc4c00]">
                             Iniciar
                             <span class="material-symbols-outlined ml-1 text-[18px]">arrow_forward</span>
 </a>
@@ -171,7 +173,7 @@
 <p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">
                         Descargá el material de apoyo visual para proyectar en el aula y los links de acceso a los juegos interactivos.
                     </p>
-<div class="flex justify-between items-center mt-auto pt-4 border-t border-blueprint-gray"><a href="https://docs.google.com/document/d/133DJ-1A8vmaM4WfvWOOMq3ZHMEIoHd3sP47rxDQYvY8/edit?usp=sharing" target="_blank" class="text-action-orange font-label-md text-label-md font-bold flex items-center hover:opacity-80 transition-opacity text-[#fc4c00]"><span class="material-symbols-outlined mr-1 text-[18px]">folder</span>Archivos</a></div>
+<div class="flex justify-between items-center mt-auto pt-4 border-t border-blueprint-gray"><a href="#" id="btn-presentaciones" target="_blank" class="text-action-orange font-label-md text-label-md font-bold flex items-center hover:opacity-80 transition-opacity text-[#fc4c00]"><span class="material-symbols-outlined mr-1 text-[18px]">folder</span>Archivos</a></div>
 </div>
 </div>
 <!-- Card 3: Repositorio -->
@@ -242,4 +244,18 @@
 
 
 
+<script>
+  function applyUrl(metaName, btnId, defaultUrl) {
+    const meta = document.querySelector(`meta[name="${metaName}"]`);
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    if (meta && meta.content && !meta.content.includes('%')) {
+      btn.href = meta.content;
+    } else {
+      btn.href = defaultUrl;
+    }
+  }
+  applyUrl('url-videotutoriales', 'btn-videotutoriales', 'https://drive.google.com/drive/folders/1O82aKVfCP3JqR8bUhE4y9Jy9My5HXZmu?usp=sharing');
+  applyUrl('url-presentaciones', 'btn-presentaciones', 'https://docs.google.com/document/d/133DJ-1A8vmaM4WfvWOOMq3ZHMEIoHd3sP47rxDQYvY8/edit?usp=sharing');
+</script>
 </body></html>

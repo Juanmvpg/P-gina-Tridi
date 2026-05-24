@@ -23,6 +23,7 @@
             gap: 24px;
         }
     </style>
+  <meta name="url-contenido-completo" content="%URL_CONTENIDO_COMPLETO%">
 </head>
 <body class="font-body-md text-body-md">
 <!-- TopAppBar -->
@@ -149,7 +150,7 @@
 <p class="text-sm font-bold">3. Impresión de Piezas</p>
 </div>
 </div>
-<a href="https://drive.google.com/drive/folders/1Z8ams6Vv-Mt8fqJnFdD2GGf4McPxVfRF?usp=sharing" target="_blank" class="bg-white text-secondary px-4 py-2 rounded-lg font-bold text-sm w-full hover:bg-opacity-90 transition-all text-center block" style="transform: translateY(0px); transition: 0.3s;">
+<a href="#" id="btn-contenido-completo" target="_blank" class="bg-white text-secondary px-4 py-2 rounded-lg font-bold text-sm w-full hover:bg-opacity-90 transition-all text-center block" style="transform: translateY(0px); transition: 0.3s;">
     Ver contenido completo →</a></div>
 <!-- Chips / Tags Section -->
 
@@ -295,4 +296,17 @@
     </script>
 
 
+<script>
+  function applyUrl(metaName, btnId, defaultUrl) {
+    const meta = document.querySelector(`meta[name="${metaName}"]`);
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    if (meta && meta.content && !meta.content.includes('%')) {
+      btn.href = meta.content;
+    } else {
+      btn.href = defaultUrl;
+    }
+  }
+  applyUrl('url-contenido-completo', 'btn-contenido-completo', 'https://drive.google.com/drive/folders/1Z8ams6Vv-Mt8fqJnFdD2GGf4McPxVfRF?usp=sharing');
+</script>
 </body></html>
