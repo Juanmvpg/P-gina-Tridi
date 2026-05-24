@@ -1,0 +1,20 @@
+# Configuración de Netlify para Tridimensionando Ideas
+# Este archivo le dice a Netlify cómo publicar tu página
+
+[build]
+  publish = "."
+  command = "node inject-envs.js"
+
+# Headers de seguridad y rendimiento
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Redirecciones - si alguien entra sin archivo, va al index
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
