@@ -1,0 +1,65 @@
+﻿<svg viewBox="0 0 320 320" class="w-full h-full object-contain" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients for 3D effect -->
+    <linearGradient id="grad-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9d70" />
+      <stop offset="100%" stop-color="#fc4c00" />
+    </linearGradient>
+    <linearGradient id="grad-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fc4c00" />
+      <stop offset="100%" stop-color="#c43b00" />
+    </linearGradient>
+    <linearGradient id="grad-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c43b00" />
+      <stop offset="100%" stop-color="#8a2900" />
+    </linearGradient>
+  </defs>  <g id="subcube-1-0-0" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="198.1,142 232.7,162 198.1,182 163.5,162" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="163.5,202 198.1,222 198.1,182 163.5,162" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="232.7,202 198.1,222 198.1,182 232.7,162" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>  <g id="subcube-0-1-0" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="121.9,142 156.5,162 121.9,182 87.3,162" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="87.3,202 121.9,222 121.9,182 87.3,162" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="156.5,202 121.9,222 121.9,182 156.5,162" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>  <g id="subcube-0-0-1" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="160,76 194.6,96 160,116 125.4,96" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="125.4,136 160,156 160,116 125.4,96" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="194.6,136 160,156 160,116 194.6,96" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>  <g id="subcube-1-1-0" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="160,164 194.6,184 160,204 125.4,184" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="125.4,224 160,244 160,204 125.4,184" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="194.6,224 160,244 160,204 194.6,184" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>  <g id="subcube-1-0-1" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="198.1,98 232.7,118 198.1,138 163.5,118" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="163.5,158 198.1,178 198.1,138 163.5,118" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="232.7,158 198.1,178 198.1,138 232.7,118" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>  <g id="subcube-0-1-1" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="121.9,98 156.5,118 121.9,138 87.3,118" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="87.3,158 121.9,178 121.9,138 87.3,118" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="156.5,158 121.9,178 121.9,138 156.5,118" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>  <g id="subcube-1-1-1" class="floating-piece">
+    <!-- Top Face -->
+    <polygon points="160,120 194.6,140 160,160 125.4,140" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="125.4,180 160,200 160,160 125.4,140" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="194.6,180 160,200 160,160 194.6,140" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g></svg>

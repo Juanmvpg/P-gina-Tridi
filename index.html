@@ -43,6 +43,16 @@
       background-color: #fcf9f3;
       color: #1a1a1a;
     }
+    #hero-image-container .floating-piece {
+      transform: translate(25px, -35px); /* starts floated away */
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #hero-image-container.complete .floating-piece {
+      transform: translate(0px, 0px); /* snapped in place */
+    }
+    #hero-image-container .absolute {
+      transition: transform 0.3s ease;
+    }
   </style>
   <meta name="url-newsletter" content="%URL_NEWSLETTER%">
   <meta name="url-tinkercad" content="%URL_TINKERCAD%">
@@ -97,8 +107,80 @@
 </div>
 <!-- Hero Illustration -->
 <div class="mt-8 md:mt-0 md:ml-8 relative">
-<div class="w-64 h-64 md:w-80 md:h-80 bg-white shadow-2xl rounded-eight flex items-center justify-center transform rotate-3 relative">
-<img alt="3D Cube Illustration" class="w-40 h-40 object-contain" id="hero-cube-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJEzT_Liz6FWyU3GiyzEp0B5L1shStyqP7tTc3Iemm9nkBlVrfHQYDCpMcpz6Sg7boHRkZwtkX8F4JJTKrDMXvnFZTgvleLew0dAgDpSN8vMy3e9ax6TU7JjnTwu6FLpBVDbDhqpga-H599Otp9A_ccrHDNBESupr3oSW57NdZCYVOrQdaq_AjU3ZXpkSCSjZll_Q9fw-k-e--x-iS5h50YR8wBTFNsnqMShffQbQmgl1ksHcLszJur8dBnD6625aiDyq8ylsu4Oc">
+<div id="hero-image-container" class="w-64 h-64 md:w-80 md:h-80 bg-white shadow-2xl rounded-eight flex items-center justify-center transform rotate-3 relative transition-transform duration-300 ease-in-out cursor-pointer">
+<svg viewBox="0 0 320 320" class="w-48 h-48 md:w-64 md:h-64 object-contain" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients for 3D effect -->
+    <linearGradient id="grad-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9d70" />
+      <stop offset="100%" stop-color="#fc4c00" />
+    </linearGradient>
+    <linearGradient id="grad-left" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fc4c00" />
+      <stop offset="100%" stop-color="#c43b00" />
+    </linearGradient>
+    <linearGradient id="grad-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c43b00" />
+      <stop offset="100%" stop-color="#8a2900" />
+    </linearGradient>
+  </defs>
+  <g id="subcube-1-0-0" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="198.1,142 232.7,162 198.1,182 163.5,162" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="163.5,202 198.1,222 198.1,182 163.5,162" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="232.7,202 198.1,222 198.1,182 232.7,162" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>
+  <g id="subcube-0-1-0" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="121.9,142 156.5,162 121.9,182 87.3,162" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="87.3,202 121.9,222 121.9,182 87.3,162" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="156.5,202 121.9,222 121.9,182 156.5,162" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>
+  <g id="subcube-0-0-1" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="160,76 194.6,96 160,116 125.4,96" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="125.4,136 160,156 160,116 125.4,96" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="194.6,136 160,156 160,116 194.6,96" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>
+  <g id="subcube-1-1-0" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="160,164 194.6,184 160,204 125.4,184" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="125.4,224 160,244 160,204 125.4,184" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="194.6,224 160,244 160,204 194.6,184" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>
+  <g id="subcube-1-0-1" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="198.1,98 232.7,118 198.1,138 163.5,118" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="163.5,158 198.1,178 198.1,138 163.5,118" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="232.7,158 198.1,178 198.1,138 232.7,118" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>
+  <g id="subcube-0-1-1" class="static-piece">
+    <!-- Top Face -->
+    <polygon points="121.9,98 156.5,118 121.9,138 87.3,118" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="87.3,158 121.9,178 121.9,138 87.3,118" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="156.5,158 121.9,178 121.9,138 156.5,118" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>
+  <g id="subcube-1-1-1" class="floating-piece">
+    <!-- Top Face -->
+    <polygon points="160,120 194.6,140 160,160 125.4,140" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
+    <!-- Left Face -->
+    <polygon points="125.4,180 160,200 160,160 125.4,140" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
+    <!-- Right Face -->
+    <polygon points="194.6,180 160,200 160,160 194.6,140" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
+  </g>
+</svg>
 <!-- Floating UI Element -->
 <div class="absolute -bottom-4 -right-4 bg-blue-500 text-white p-3 rounded-eight shadow-lg transform -rotate-3">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
@@ -252,8 +334,8 @@
   applyUrl('url-tinkercad', 'btn-tinkercad-mobile', 'https://www.tinkercad.com/');
   applyUrl('url-filminas', 'btn-filminas', 'https://canva.link/kuge1m3si5tnzl6');
 
-  // Micro-interaction: Smooth hover effect for cards and header
-  document.querySelectorAll('.bg-white').forEach(card => {
+  // Micro-interaction: Smooth hover effect for cards and header (excluding the hero image)
+  document.querySelectorAll('.bg-white:not(#hero-image-container)').forEach(card => {
     card.addEventListener('mouseenter', () => {
       card.classList.add('shadow-md');
       card.style.transform = 'translateY(-2px)';
@@ -264,5 +346,93 @@
       card.style.transform = 'translateY(0px)';
     });
   });
+
+  // Toggle rotation and completion on click for the hero illustration
+  const heroImageContainer = document.getElementById('hero-image-container');
+  const floatingBadge = heroImageContainer ? heroImageContainer.querySelector('.absolute') : null;
+  
+  let clickCount = 0;
+  let clickTimer = null;
+  let confettiTriggered = false;
+
+  function triggerConfetti() {
+    if (confettiTriggered) return;
+    confettiTriggered = true;
+    
+    const rect = heroImageContainer.getBoundingClientRect();
+    const colors = ['#fc4c00', '#138eff', '#ffcd00', '#00e676', '#ea1e63'];
+    
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.style.position = 'fixed';
+      p.style.width = (Math.random() * 8 + 4) + 'px';
+      p.style.height = (Math.random() * 8 + 4) + 'px';
+      p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      p.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      p.style.pointerEvents = 'none';
+      p.style.zIndex = '9999';
+      
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = Math.random() * 6 + 4;
+      let vx = Math.cos(angle) * velocity;
+      let vy = Math.sin(angle) * velocity - 4; // Upward velocity bias
+      let px = rect.left + rect.width / 2;
+      let py = rect.top + rect.height / 2;
+      
+      p.style.left = px + 'px';
+      p.style.top = py + 'px';
+      document.body.appendChild(p);
+      
+      let opacity = 1;
+      function update() {
+        vx *= 0.97;
+        vy += 0.25; // gravity
+        px += vx;
+        py += vy;
+        p.style.left = px + 'px';
+        p.style.top = py + 'px';
+        opacity -= 0.015;
+        p.style.opacity = opacity;
+        
+        if (opacity > 0) {
+          requestAnimationFrame(update);
+        } else {
+          p.remove();
+        }
+      }
+      requestAnimationFrame(update);
+    }
+  }
+
+  if (heroImageContainer && floatingBadge) {
+    heroImageContainer.addEventListener('click', () => {
+      // Toggle rotation
+      if (heroImageContainer.classList.contains('rotate-3')) {
+        heroImageContainer.classList.remove('rotate-3');
+        heroImageContainer.classList.add('rotate-0', 'complete');
+        floatingBadge.classList.remove('-rotate-3');
+        floatingBadge.classList.add('rotate-0');
+      } else {
+        heroImageContainer.classList.remove('rotate-0', 'complete');
+        heroImageContainer.classList.add('rotate-3');
+        floatingBadge.classList.remove('rotate-0');
+        floatingBadge.classList.add('-rotate-3');
+      }
+
+      // Click-spam easter egg (7 rapid clicks, max 200ms gap between each)
+      if (!confettiTriggered) {
+        clickCount++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+          clickCount = 0;
+        }, 200);
+
+        if (clickCount >= 7) {
+          triggerConfetti();
+          clickCount = 0;
+        }
+      }
+    });
+  }
 </script>
 </body></html>
