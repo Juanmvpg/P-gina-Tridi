@@ -55,7 +55,7 @@
 <div class="flex justify-between items-center h-16">
 <!-- Logo -->
 <div class="flex-shrink-0 flex items-center">
-<span class="text-brand font-extrabold text-xl tracking-tight">Tridimensionando Ideas</span>
+<a href="index.html" class="text-brand font-extrabold text-xl tracking-tight hover:opacity-90 transition-opacity">Tridimensionando Ideas</a>
 </div>
 <!-- Navigation Links -->
 <nav class="hidden md:flex space-x-8 items-center">
@@ -153,7 +153,8 @@
 <section class="space-y-6" data-purpose="tools-section">
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 <!-- Main Large Tool Card -->
-<div class="lg:col-span-2 bg-surface-container rounded-eight p-8 relative flex flex-col justify-between overflow-hidden group h-80 lg:h-auto md:flex-row items-center"><div class="z-10">
+<div class="lg:col-span-2 bg-surface-container rounded-eight p-8 relative flex flex-col md:flex-row items-center justify-between group h-auto">
+<div class="z-10">
 <div class="w-12 h-12 bg-brand rounded-eight flex items-center justify-center text-white mb-6">
 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
@@ -161,15 +162,22 @@
 <p class="text-gray-600 max-w-md">
               Acceso directo al entorno de modelado 3D de las clases. Entrá al aula virtual y revisá los diseños de los alumnos en tiempo real.
             </p>
-<a id="btn-tinkercad" target="_blank" class="mt-6 text-brand font-semibold flex items-center text-sm hover:underline" href="#">
+<a id="btn-tinkercad-desktop" target="_blank" class="hidden md:flex mt-6 text-brand font-semibold items-center text-sm hover:underline" href="#">
   Entrar al aula
   <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 </svg>
 </a></div>
-<div class="w-32 h-32 md:w-48 md:h-48 flex-shrink-0 flex items-center justify-center z-10">
+<div class="w-32 h-32 md:w-48 md:h-48 flex-shrink-0 flex items-center justify-center z-10 my-4 md:my-0">
 <img alt="Tinkercad Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANl5aSjONcKclUQ5vShBJOY12ovoOxv00FUIPcKnQp9PZvs7L0pYd3Fhh4ppqAFaFT3Smd-6D7lvrjS87eeVoo0nJVUMf8NNswpS6G_vSiqaBu-15vztSxUPGhzmZb7Ndf-n5XiOncO5pewWdI0w17IOs5BBmYjQeHt-4ifHxDWUkkSU1NckhKV0N10Xc6NksOwPhcVh1sQhFufYv_r1Atk6-vLYPz0bI7zgqS7-3BzMeYeB0aQKlG_lHL1w2uyqkVb-oFv9niI0Q">
-</div></div>
+</div>
+<a id="btn-tinkercad-mobile" target="_blank" class="flex md:hidden text-brand font-semibold items-center text-sm hover:underline self-start mt-2" href="#">
+  Entrar al aula
+  <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
 <!-- Secondary Resource Card -->
 <div class="border rounded-eight p-8 shadow-sm flex flex-col justify-between bg-surface-container">
 <div>
@@ -223,7 +231,8 @@
   }
   // Se proveen las URLs por defecto que me diste por si Netlify no las reemplaza aún
   applyUrl('url-newsletter', 'btn-newsletter', 'https://proyectotridi.my.canva.site/');
-  applyUrl('url-tinkercad', 'btn-tinkercad', 'https://www.tinkercad.com/');
+  applyUrl('url-tinkercad', 'btn-tinkercad-desktop', 'https://www.tinkercad.com/');
+  applyUrl('url-tinkercad', 'btn-tinkercad-mobile', 'https://www.tinkercad.com/');
   applyUrl('url-filminas', 'btn-filminas', 'https://canva.link/kuge1m3si5tnzl6');
 
   // Micro-interaction: Smooth hover effect for cards and header
