@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso - Tridimensionando Ideas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#FC4C00', // Action Orange
+                            tech: '#138EFF',    // Tech Blue
+                        },
+                        surface: {
+                            DEFAULT: '#FCF9F3', // Workshop White
+                            container: '#F0EEE8',
+                            low: '#F6F3ED'
+                        },
+                        outline: '#916F66',
+                        'blueprint-gray': '#E2E8F0'
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FCF9F3;
+        }
+    </style>
+    <meta name="url-spreadsheet" content="%URL_SPREADSHEET%">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
+    <!-- Blueprint Grid Pattern inside lock screen for brand style consistency -->
+    <div class="absolute inset-0 opacity-30" style="background-image: linear-gradient(to right, #E2E8F0 1px, transparent 1px), linear-gradient(to bottom, #E2E8F0 1px, transparent 1px); background-size: 40px 40px;"></div>
+    
+    <!-- Card -->
+    <div class="relative bg-white border border-gray-100 rounded-2xl p-8 max-w-md w-full shadow-2xl space-y-6 text-center z-10">
+        <!-- Help Button -->
+        <button id="btn-help" class="absolute top-4 right-4 text-gray-400 hover:text-brand transition-colors w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100" title="¿Tenés problemas para ingresar?">
+            <span class="material-symbols-outlined text-xl">help</span>
+        </button>
+
+        <!-- Icon -->
+        <div class="w-16 h-16 bg-brand/10 text-brand rounded-2xl flex items-center justify-center mx-auto">
+            <span class="material-symbols-outlined text-4xl">lock</span>
+        </div>
+        
+        <div class="space-y-2">
+            <h2 class="text-2xl font-extrabold text-gray-900 font-sora">Acceso Restringido</h2>
+            <p class="text-sm text-gray-500 font-jakarta leading-relaxed">
+                Ingresá tu DNI de voluntario registrado o clave de acceso para entrar a la plataforma.
+            </p>
+        </div>
+        
+        <!-- Form -->
+        <div class="space-y-4 text-left">
+            <div>
+                <label for="gate-password" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 font-inter">DNI o Clave de Acceso</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <span class="material-symbols-outlined text-lg">vpn_key</span>
+                    </span>
+                    <input type="password" id="gate-password" placeholder="Ej: 39498510" class="pl-10 pr-4 py-3 w-full border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand bg-white font-jakarta shadow-sm">
+                </div>
+            </div>
+            
+            <button id="btn-login" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center transition-colors shadow-lg shadow-brand/20">
+                <span class="material-symbols-outlined mr-2 text-sm">login</span>
+                Ingresar al Sitio
+            </button>
+            
+            <!-- Error text -->
+            <p id="login-error" class="hidden text-xs text-red-500 font-semibold text-center mt-2 flex items-center justify-center gap-1">
+                <span class="material-symbols-outlined text-xs flex-shrink-0">error</span>
+                <span>Acceso denegado. Verificá los datos.</span>
+            </p>
+            
+            <!-- Help Box -->
+            <div id="help-box" class="hidden bg-blue-50 border border-blue-100 rounded-xl p-4 mt-2 text-left transition-all duration-300">
+                <div class="flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-blue-500 mt-0.5 text-lg flex-shrink-0">info</span>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-blue-900 font-inter uppercase tracking-wide">Asistencia de Acceso</h4>
+                        <p class="text-xs text-blue-700 font-jakarta leading-relaxed">
+                            Contactar con el coordinador o el ayudante Juan Giménez para solucionar tu problema.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client-Side Live Fetching and Parsing Logic -->
+    <script>
+        // Google Sheets CSV URL Setup
+        function getSpreadsheetUrl() {
+            const meta = document.querySelector('meta[name="url-spreadsheet"]');
+            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1SxucJUDXjgqRuSRcbtFh-zy4OnVYOoqsz67SCetbN0A/export?format=csv';
+            
+            if (meta && meta.content && !meta.content.includes('%')) {
+                return meta.content;
+            }
+            return defaultUrl;
+        }
+
+        // RFC 4180 Compliant CSV Parser
+        function parseCSV(text) {
+            let lines = [];
+            let row = [""];
+            let inQuotes = false;
+            
+            for (let i = 0; i < text.length; i++) {
+                let c = text[i];
+                let next = text[i+1];
+                
+                if (c === '"') {
+                    if (inQuotes && next === '"') {
+                        row[row.length - 1] += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (c === ',' && !inQuotes) {
+                    row.push('');
+                } else if ((c === '\r' || c === '\n') && !inQuotes) {
+                    if (c === '\r' && next === '\n') {
+                        i++;
+                    }
+                    lines.push(row);
+                    row = [''];
+                } else {
+                    row[row.length - 1] += c;
+                }
+            }
+            if (row.length > 1 || row[0] !== '') {
+                lines.push(row);
+            }
+            return lines;
+        }
+
+        let volunteerData = [];
+        let fetchPromise = null;
+
+        // Fetch and process data from Google Sheets in the background
+        async function fetchVolunteerHours() {
+            try {
+                const url = getSpreadsheetUrl();
+                const timestampedUrl = url + (url.includes('?') ? '&' : '?') + 't=' + new Date().getTime();
+                
+                const response = await fetch(timestampedUrl);
+                if (!response.ok) throw new Error('Error network');
+                
+                const csvText = await response.text();
+                const parsedLines = parseCSV(csvText);
+                
+                volunteerData = [];
+                for (let i = 1; i < parsedLines.length; i++) {
+                    const row = parsedLines[i];
+                    if (row.length < 6) continue;
+                    
+                    const dni = row[2] ? row[2].trim() : '';
+                    if (!dni || dni.toLowerCase() === 'dni' || isNaN(dni)) continue;
+                    
+                    volunteerData.push({ dni });
+                }
+            } catch (err) {
+                console.error('Fetch error:', err);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Start loading spreadsheet immediately
+            fetchPromise = fetchVolunteerHours();
+            
+            const passwordInput = document.getElementById('gate-password');
+            const loginBtn = document.getElementById('btn-login');
+            const loginError = document.getElementById('login-error');
+
+            // If already logged in, check if expired
+            if (localStorage.getItem('tridi_session_active') === 'true') {
+                const lastActivity = localStorage.getItem('tridi_last_activity');
+                const TIMEOUT_MS = 12 * 60 * 60 * 1000; // 12 horas
+                if (lastActivity && (Date.now() - parseInt(lastActivity, 10) > TIMEOUT_MS)) {
+                    localStorage.removeItem('tridi_session_active');
+                    localStorage.removeItem('tridi_last_activity');
+                } else {
+                    window.location.replace('index.html');
+                }
+            }
+
+            async function handleLogin() {
+                const val = passwordInput.value.trim();
+                if (!val) return;
+                
+                loginError.classList.add('hidden');
+                
+                // Master Key check
+                if (val === '909091') {
+                    grantAccess();
+                    return;
+                }
+                
+                // Show loading state
+                loginBtn.disabled = true;
+                const originalHtml = loginBtn.innerHTML;
+                loginBtn.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Verificando...
+                `;
+                
+                try {
+                    await fetchPromise;
+                    const cleanQuery = val.replace(/\D/g, '');
+                    const matched = volunteerData.some(v => v.dni === cleanQuery);
+                    
+                    if (matched) {
+                        grantAccess();
+                    } else {
+                        showError("Acceso denegado. El DNI ingresado no figura como voluntario registrado.");
+                    }
+                } catch (e) {
+                    showError("Error de conexión. Intentá ingresar con la clave maestra.");
+                } finally {
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = originalHtml;
+                }
+            }
+
+            function grantAccess() {
+                localStorage.setItem('tridi_session_active', 'true');
+                localStorage.setItem('tridi_last_activity', Date.now().toString());
+                window.location.replace('index.html');
+            }
+
+            function showError(msg) {
+                loginError.querySelector('span:last-child').textContent = msg;
+                loginError.classList.remove('hidden');
+                passwordInput.focus();
+            }
+
+            loginBtn.addEventListener('click', handleLogin);
+            passwordInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') handleLogin();
+            });
+
+            // Toggle assistance message
+            const helpBtn = document.getElementById('btn-help');
+            const helpBox = document.getElementById('help-box');
+            if (helpBtn && helpBox) {
+                helpBtn.addEventListener('click', () => {
+                    helpBox.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

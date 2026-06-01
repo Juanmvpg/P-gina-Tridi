@@ -1,0 +1,95 @@
+## Guía de URLs y configuraciones de Netlify para el proyecto Tridi
+
+Este documento describe, de forma sencilla y clara, qué hace cada URL y regla definida en el archivo **netlify.toml** del proyecto. Está pensado para que cualquier persona externa (con conocimientos básicos de despliegues estáticos) pueda entender y modificar la configuración sin dificultad.
+
+---
+### 1. Archivo `netlify.toml`
+El archivo se encuentra en la raíz del proyecto:
+```
+C:/Users/gian9/.gemini/antigravity/scratch/P-gina-Tridi/netlify.toml
+```
+A continuación se explica cada sección y cada URL involucrada.
+
+---
+### 2. Sección `[build]`
+```toml
+[build]
+  publish = "."
+  command = "node inject-envs.js"
+```
+| Parámetro | Qué hace | URL o ruta relacionada |
+|-----------|----------|------------------------|
+| `publish = "."` | Indica a Netlify que la carpeta que debe publicar es la raíz del proyecto (el punto `.`). Todos los archivos estáticos (`index.html`, `panel.html`, etc.) serán servidos directamente desde aquí. | No es una URL externa, sino la **ruta local** que Netlify empaquetará y expondrá como `https://<site-name>.netlify.app/`.
+| `command = "node inject-envs.js"` | Antes de que Netlify empaquete los archivos, ejecuta este script Node.js. El script reemplaza los placeholders `%VARIABLE%` dentro de los HTML con los valores de variables de entorno (URLs de hojas de cálculo, enlaces externos, etc.). | No genera una URL propia, pero **modifica** los HTML que luego estarán disponibles en la URL del sitio.
+
+---
+### 3. Cabeceras de seguridad (`[[headers]]`)
+```toml
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+```
+- **`for = "/*"`**: Aplica las cabeceras a **todas** las rutas del sitio (`https://<site-name>.netlify.app/*`).
+- Cada cabecera protege al visitante y al sitio. No son URLs, sino valores que Netlify inserta en la respuesta HTTP.
+
+---
+### 4. Redirección (`[[redirects]]`)
+```toml
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+```
+- **`from = "/"`**: Cuando el navegador solicita la raíz del dominio (`https://<site-name>.netlify.app/`).
+- **`to = "/index.html"`**: Netlify responde con el archivo `index.html` sin cambiar la URL visible (status **200**, no 301/302). Esto garantiza que la página principal se cargue correctamente.
+- **URL resultante**: `https://<site-name>.netlify.app/` → sirve `index.html`.
+
+---
+### 5. URL pública del sitio Netlify
+Una vez desplegado, Netlify asigna una URL automática del tipo:
+```
+https://<nombre‑del‑sitio>.netlify.app/
+```
+- Puedes cambiar el sub‑dominio desde el panel de Netlify (Settings → Site name). Si tienes un dominio propio, puedes configurarlo (Custom domain).
+- Esta URL es la que comparten los usuarios para acceder al sitio.
+
+---
+### 6. Cómo modificar o añadir nuevas URLs
+1. **Añadir una nueva regla de redirección**
+   ```toml
+   [[redirects]]
+     from = "/old-page.html"
+     to = "/new-page.html"
+     status = 301   # redirección permanente
+   ```
+   - `from` es la URL solicitada.
+   - `to` es la URL destino dentro del mismo sitio.
+2. **Añadir cabeceras específicas a una ruta**
+   ```toml
+   [[headers]]
+     for = "/api/*"
+     [headers.values]
+       Cache-Control = "public, max-age=600"
+   ```
+   - Aplica solo a rutas que empiecen por `/api/`.
+3. **Cambiar la carpeta de publicación**
+   - Modifica `publish = "dist"` si en el futuro construyes los archivos con un bundler y los colocas en una carpeta `dist/`.
+
+---
+### 7. Resumen rápido
+- **`publish`** → carpeta que Netlify hará pública.
+- **`command`** → script que inyecta URLs (variables de entorno) antes del despliegue.
+- **`[[headers]]`** → cabeceras de seguridad para *todas* las rutas (`/*`).
+- **`[[redirects]]`** → redirección interna de la raíz `/` a `index.html`.
+- **URL del sitio** → `https://<site-name>.netlify.app/` (puede personalizarse).
+
+---
+### 8. Contacto para dudas
+- **Juan Giménez** – Coordinador del proyecto (email: juan.gimenez@example.com)
+- **Equipo de DevOps** – Slack `#netlify-support`
+
+---
+*Generado automáticamente por Antigravity el 2026‑06‑01.*

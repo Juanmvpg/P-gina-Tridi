@@ -1,0 +1,72 @@
+## Instrucciones para modificar variables de entorno en el proyecto Tridi
+
+Este documento está pensado para que cualquier colaborador (con conocimientos básicos de línea de comandos) pueda actualizar rápidamente las variables de entorno que utiliza la aplicación web.
+
+---
+### 1. ¿Qué son las variables de entorno?
+Las variables de entorno son valores que el código lee en tiempo de ejecución para decidir, por ejemplo, la URL de origen de los datos, claves de API, o configuraciones de tiempo de espera. En este proyecto usamos un pequeño script llamado **inject‑envs.js** que inyecta esas variables en el frontend.
+
+---
+### 2. Ubicación del archivo de configuración
+El archivo que controla estas variables está en la raíz del proyecto:
+```
+C:/Users/gian9/.gemini/antigravity/scratch/P-gina-Tridi/inject‑envs.js
+```
+En él encontrarás una sección similar a la siguiente:
+```js
+// ---- Variables de entorno ----
+window.ENV = {
+  SCHEDULE_SHEET_URL: "https://docs.google.com/spreadsheets/d/…/export?format=csv",
+  ACTIVITY_SHEET_URL: "https://docs.google.com/spreadsheets/d/…/export?format=csv",
+  // Puedes añadir más variables aquí
+};
+```
+---
+### 3. Pasos para modificar una variable
+1. **Abrir el archivo**
+   - Usa tu editor de texto favorito (VS Code, Notepad++, etc.)
+   - Navega a la ruta indicada arriba y abre `inject‑envs.js`.
+2. **Localizar la variable**
+   - Busca la línea que contiene el nombre de la variable que deseas cambiar (por ejemplo `SCHEDULE_SHEET_URL`).
+3. **Reemplazar el valor**
+   - Copia la nueva URL (o el nuevo valor) y reemplázalo entre las comillas dobles.
+   - Asegúrate de **no** eliminar las comillas ni la coma al final de la línea (excepto en la última variable).
+4. **Guardar los cambios**
+   - Guarda el archivo (`Ctrl+S`).
+5. **Reiniciar el servidor local** (opcional)
+   - Si el servidor ya está en marcha, abre una terminal en la carpeta del proyecto y ejecuta:
+     ```
+     powershell -ExecutionPolicy Bypass -File start-server.ps1
+     ```
+   - Luego recarga la página en el navegador (`Ctrl+R`).
+
+---
+### 4. Variables comunes que puedes encontrar
+| Nombre de la variable            | Descripción                                            | Ejemplo de valor                         |
+|----------------------------------|--------------------------------------------------------|------------------------------------------|
+| `SCHEDULE_SHEET_URL`            | URL pública del Sheet que contiene el cronograma       | `https://docs.google.com/.../export?format=csv` |
+| `ACTIVITY_SHEET_URL`            | URL pública del Sheet que contiene actividades registradas | idem |
+| `INACTIVITY_TIMEOUT_MS`         | Tiempo (en milisegundos) de auto‑desconexión por inactividad | `300000` (5 min) |
+| `HELP_BUTTON_CONTACT`           | Texto que aparece al pulsar el botón de ayuda (`?`)   | `Contactar al coordinador Juan Giménez` |
+
+---
+### 5. Buenas prácticas
+- **No elimines la línea** `window.ENV = { … };` completa.
+- **Mantén las comas** al final de cada par clave‑valor, excepto la última.
+- **Guarda una copia** del archivo antes de hacer cambios críticos (Ctrl+Shift+S → `inject‑envs.backup.js`).
+- **Prueba** la aplicación después de cada cambio para asegurarte de que la URL es accesible (abre la URL en el navegador).
+
+---
+### 6. Solución de problemas
+- **Error 404 al cargar datos** → Verifica que la hoja está compartida como *Cualquier persona con el enlace*.
+- **Los cambios no se reflejan** → Asegúrate de haber reiniciado el servidor y de haber borrado la caché del navegador (`Ctrl+Shift+R`).
+- **Símbolos extraños** → Revisa que no haya caracteres invisibles al copiar la URL.
+
+---
+### 7. Contacto
+Si necesitas ayuda adicional, contacta a:
+- **Juan Giménez** – Coordinador (correo: juan.gimenez@example.com)
+- **Soporte técnico** – chat interno de la organización
+
+---
+*Documento generado automáticamente por Antigravity el 2026‑06‑01.*
