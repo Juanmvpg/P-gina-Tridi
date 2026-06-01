@@ -10,27 +10,27 @@ Las variables de entorno son valores que el código lee en tiempo de ejecución 
 ### 2. Ubicación del archivo de configuración
 El archivo que controla estas variables está en la raíz del proyecto:
 ```
-C:/Users/gian9/.gemini/antigravity/scratch/P-gina-Tridi/inject‑envs.js
+C:/Users/gian9/.gemini/antigravity/scratch/P-gina-Tridi/inject-envs.js
 ```
 En él encontrarás una sección similar a la siguiente:
 ```js
-// ---- Variables de entorno ----
-window.ENV = {
-  SCHEDULE_SHEET_URL: "https://docs.google.com/spreadsheets/d/…/export?format=csv",
-  ACTIVITY_SHEET_URL: "https://docs.google.com/spreadsheets/d/…/export?format=csv",
-  // Puedes añadir más variables aquí
-};
+    const envs = {
+      'URL_NEWSLETTER': process.env.URL_NEWSLETTER || 'https://proyectotridi.my.canva.site/',
+      'URL_TINKERCAD': process.env.URL_TINKERCAD || 'https://www.tinkercad.com/',
+      // ...
+      'URL_REPORTE_FALLAS': process.env.URL_REPORTE_FALLAS || 'https://docs.google.com/forms/d/e/...'
+    };
 ```
 ---
 ### 3. Pasos para modificar una variable
 1. **Abrir el archivo**
-   - Usa tu editor de texto favorito (VS Code, Notepad++, etc.)
-   - Navega a la ruta indicada arriba y abre `inject‑envs.js`.
+   - Usa tu editor de texto favorito (VS Code, Notepad++, etc.)
+   - Navega a la ruta indicada arriba y abre `inject-envs.js`.
 2. **Localizar la variable**
-   - Busca la línea que contiene el nombre de la variable que deseas cambiar (por ejemplo `SCHEDULE_SHEET_URL`).
-3. **Reemplazar el valor**
-   - Copia la nueva URL (o el nuevo valor) y reemplázalo entre las comillas dobles.
-   - Asegúrate de **no** eliminar las comillas ni la coma al final de la línea (excepto en la última variable).
+   - Busca la línea que contiene el nombre de la variable que deseas cambiar (por ejemplo `'URL_CRONOGRAMA'`).
+3. **Reemplazar el valor por defecto**
+   - Modifica el enlace de respaldo que se encuentra después del operador `||`.
+   - Asegúrate de **no** eliminar las comillas simples ni las comas.
 4. **Guardar los cambios**
    - Guarda el archivo (`Ctrl+S`).
 5. **Reiniciar el servidor local** (opcional)
@@ -44,10 +44,15 @@ window.ENV = {
 ### 4. Variables comunes que puedes encontrar
 | Nombre de la variable            | Descripción                                            | Ejemplo de valor                         |
 |----------------------------------|--------------------------------------------------------|------------------------------------------|
-| `SCHEDULE_SHEET_URL`            | URL pública del Sheet que contiene el cronograma       | `https://docs.google.com/.../export?format=csv` |
-| `ACTIVITY_SHEET_URL`            | URL pública del Sheet que contiene actividades registradas | idem |
-| `INACTIVITY_TIMEOUT_MS`         | Tiempo (en milisegundos) de auto‑desconexión por inactividad | `300000` (5 min) |
-| `HELP_BUTTON_CONTACT`           | Texto que aparece al pulsar el botón de ayuda (`?`)   | `Contactar al coordinador Juan Giménez` |
+| `URL_CRONOGRAMA`                 | URL del Google Sheet que contiene el cronograma        | `https://docs.google.com/.../export?format=csv` |
+| `URL_SPREADSHEET`                | URL del Google Sheet de las horas registradas           | `https://docs.google.com/.../export?format=csv` |
+| `URL_NEWSLETTER`                 | Enlace al Newsletter o sitio de Canva                  | `https://proyectotridi.my.canva.site/` |
+| `URL_TINKERCAD`                  | Enlace principal de acceso a Tinkercad                 | `https://www.tinkercad.com/` |
+| `URL_FILMINAS`                   | Enlace al recurso de Canva (filminas)                  | `https://canva.link/kuge1m3si5tnzl6` |
+| `URL_VIDEOTUTORIALES`            | Enlace a la carpeta de Google Drive con videotutoriales | `https://drive.google.com/drive/folders/...` |
+| `URL_PRESENTACIONES`             | Enlace al documento de presentaciones                  | `https://docs.google.com/document/d/...` |
+| `URL_CONTENIDO_COMPLETO`         | Enlace a la carpeta contenedora con todo el contenido  | `https://drive.google.com/drive/folders/...` |
+| `URL_REPORTE_FALLAS`             | Enlace al formulario Google Form de fallas técnicas    | `https://docs.google.com/forms/d/e/...` |
 
 ---
 ### 5. Buenas prácticas

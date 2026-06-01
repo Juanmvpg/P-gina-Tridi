@@ -75,6 +75,7 @@
         }
     </style>
   <meta name="url-contenido-completo" content="%URL_CONTENIDO_COMPLETO%">
+  <meta name="url-reporte-fallas" content="%URL_REPORTE_FALLAS%">
 </head>
 <body class="font-body-md text-body-md">
     <!-- Header -->
@@ -281,16 +282,16 @@
 <div class="space-y-4">
 <p class="text-on-surface-variant">Durante los talleres pueden surgir fallos o situaciones imprevistas. En esta sección se registrarán los problemas detectados y las soluciones aplicadas, para que puedan consultarse.</p>
 <div class="grid grid-cols-1 gap-3">
-<div onclick="alert('Contactar a Ayudantes asignados a área Laboratorio.')" class="bg-white p-4 rounded-lg flex items-center justify-between border border-outline-variant hover:border-primary transition-colors cursor-pointer group" style="transform: translateY(0px); transition: 0.3s;">
+<a id="btn-reporte-fallas" href="#" target="_blank" class="bg-white p-4 rounded-lg flex items-center justify-between border border-outline-variant hover:border-primary transition-colors cursor-pointer group" style="transform: translateY(0px); transition: 0.3s; display: flex;">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">bug_report</span>
 <div>
 <p class="font-bold text-sm">Reporte de Fallas Técnicas</p>
-<p class="text-xs text-on-surface-variant">Contactar ayudantes de Laboratorio</p>
+<p class="text-xs text-on-surface-variant">Abrir formulario de reporte</p>
 </div>
 </div>
 <span class="material-symbols-outlined text-outline">chevron_right</span>
-</div>
+</a>
 </div>
 </div>
 </div>
@@ -375,6 +376,7 @@
     }
   }
   applyUrl('url-contenido-completo', 'btn-contenido-completo', 'https://drive.google.com/drive/folders/1Z8ams6Vv-Mt8fqJnFdD2GGf4McPxVfRF?usp=sharing');
+  applyUrl('url-reporte-fallas', 'btn-reporte-fallas', 'https://docs.google.com/forms/d/e/1FAIpQLSca1WG1YBkjE8jMsJWqLb9yDkMH1VgWLalM_NMo5jezxbMOzQ/viewform?usp=publish-editor');
 
   // Logout functionality
   const logoutBtn = document.getElementById('btn-logout');
