@@ -102,6 +102,9 @@
   <meta name="url-newsletter" content="%URL_NEWSLETTER%">
   <meta name="url-tinkercad" content="%URL_TINKERCAD%">
   <meta name="url-filminas" content="%URL_FILMINAS%">
+  <meta name="url-kahoot" content="%URL_KAHOOT%">
+  <meta name="url-quizizz" content="%URL_QUIZIZZ%">
+  <meta name="url-filminas-colegio" content="%URL_FILMINAS_COLEGIO%">
 </head>
 <body class="min-h-screen">
 <!-- BEGIN: MainHeader -->
@@ -289,7 +292,7 @@
 <div class="lg:col-span-2 bg-surface-container rounded-eight p-8 relative flex flex-col md:flex-row items-center justify-between group h-auto">
 <div class="z-10">
 <div class="w-12 h-12 bg-brand rounded-eight flex items-center justify-center text-white mb-6">
-<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 001 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 011-1h1a2 2 0 100-4H7a1 1 0 01-1-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </div>
 <h3 class="text-2xl font-bold mb-4">Espacio TinkerCAD</h3>
 <p class="text-gray-600 max-w-md">
@@ -314,7 +317,7 @@
 <!-- Secondary Resource Card -->
 <div class="border rounded-eight p-8 shadow-sm flex flex-col justify-between bg-surface-container">
 <div>
-<h3 class="text-xl font-bold mb-2 mb-4">Filminas actualizadas</h3>
+<h3 class="text-xl font-bold mb-2 mb-4">Filminas Taller</h3>
 <p class="text-gray-500 text-sm">Presentaciones estandarizadas para usar durante los talleres.</p>
 <a id="btn-filminas" target="_blank" class="mt-4 text-brand font-semibold flex items-center text-sm hover:underline" href="#">
   Ver filminas
@@ -323,19 +326,55 @@
 </svg>
 </a></div>
 </div>
-<!-- Small Resource Card -->
+<!-- Filminas de Colegio Card -->
 <div class="border rounded-eight p-8 shadow-sm flex flex-col justify-between bg-surface-container">
-<div class="">
-<h3 class="text-xl font-bold mb-2">¿Problemas al imprimir?</h3>
-<p class="text-gray-500 text-sm mb-4">Guías de resolución de problemas comunes en las impresoras.</p>
-
-<a class="mt-4 text-brand font-semibold flex items-center text-sm hover:underline" href="recursos.html">Buscar solución<svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<div>
+<h3 class="text-xl font-bold mb-2 mb-4">Filminas de colegio</h3>
+<p class="text-gray-500 text-sm">Presentaciones adaptadas para visitas y talleres en escuelas secundarias.</p>
+<a id="btn-filminas-colegio" target="_blank" class="mt-4 text-brand font-semibold flex items-center text-sm hover:underline" href="#">
+  Ver filminas de colegio
+  <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
 </svg>
 </a></div>
 </div>
-<!-- Featured Projects Gallery -->
-
+<!-- Kahoot Card -->
+<div class="border rounded-eight p-8 shadow-sm flex flex-col justify-between bg-surface-container">
+<div>
+<h3 class="text-xl font-bold mb-2 mb-4">Desafíos en Kahoot</h3>
+<p class="text-gray-500 text-sm">Cuestionarios interactivos de preguntas y respuestas para repasar al final de la clase.</p>
+<a id="btn-kahoot" target="_blank" class="mt-4 text-brand font-semibold flex items-center text-sm hover:underline" href="#">
+  Iniciar Kahoot
+  <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a></div>
+</div>
+<!-- Quizizz Card -->
+<div class="border rounded-eight p-8 shadow-sm flex flex-col justify-between bg-surface-container">
+<div>
+<h3 class="text-xl font-bold mb-2 mb-4">Trivias en Quizizz</h3>
+<p class="text-gray-500 text-sm">Juegos educativos y cuestionarios dinámicos diseñados para motivar y evaluar el aprendizaje.</p>
+<a id="btn-quizizz" target="_blank" class="mt-4 text-brand font-semibold flex items-center text-sm hover:underline" href="#">
+  Abrir Quizizz
+  <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a></div>
+</div>
+<!-- Troubleshooting Card (lg:col-span-3) -->
+<div class="lg:col-span-3 border rounded-eight p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between bg-surface-container gap-6">
+<div>
+<h3 class="text-xl font-bold mb-2">¿Problemas al imprimir?</h3>
+<p class="text-gray-500 text-sm max-w-xl">Guías de resolución de problemas comunes en las impresoras (warping, atascos, nivelación, etc.).</p>
+</div>
+<a class="text-brand font-semibold flex items-center text-sm hover:underline whitespace-nowrap self-start md:self-auto" href="recursos.html">
+  Buscar solución
+  <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+  </svg>
+</a>
+</div>
 </div>
 </section>
 <!-- END: ToolsAndResources -->
@@ -388,6 +427,9 @@
   applyUrl('url-tinkercad', 'btn-tinkercad-desktop', 'https://www.tinkercad.com/');
   applyUrl('url-tinkercad', 'btn-tinkercad-mobile', 'https://www.tinkercad.com/');
   applyUrl('url-filminas', 'btn-filminas', 'https://canva.link/kuge1m3si5tnzl6');
+  applyUrl('url-filminas-colegio', 'btn-filminas-colegio', 'https://canva.link/kuge1m3si5tnzl6');
+  applyUrl('url-kahoot', 'btn-kahoot', 'https://kahoot.it/');
+  applyUrl('url-quizizz', 'btn-quizizz', 'https://quizizz.com/');
 
   // Micro-interaction: Smooth hover effect for cards and header (excluding the hero image)
   document.querySelectorAll('.bg-white:not(#hero-image-container)').forEach(card => {

@@ -49,10 +49,13 @@ En él encontrarás una sección similar a la siguiente:
 | `URL_NEWSLETTER`                 | Enlace al Newsletter o sitio de Canva                  | `https://proyectotridi.my.canva.site/` |
 | `URL_TINKERCAD`                  | Enlace principal de acceso a Tinkercad                 | `https://www.tinkercad.com/` |
 | `URL_FILMINAS`                   | Enlace al recurso de Canva (filminas)                  | `https://canva.link/kuge1m3si5tnzl6` |
+| `URL_FILMINAS_COLEGIO`           | Enlace al recurso de Canva (filminas de colegio)       | `https://canva.link/kuge1m3si5tnzl6` |
 | `URL_VIDEOTUTORIALES`            | Enlace a la carpeta de Google Drive con videotutoriales | `https://drive.google.com/drive/folders/...` |
 | `URL_PRESENTACIONES`             | Enlace al documento de presentaciones                  | `https://docs.google.com/document/d/...` |
 | `URL_CONTENIDO_COMPLETO`         | Enlace a la carpeta contenedora con todo el contenido  | `https://drive.google.com/drive/folders/...` |
 | `URL_REPORTE_FALLAS`             | Enlace al formulario Google Form de fallas técnicas    | `https://docs.google.com/forms/d/e/...` |
+| `URL_KAHOOT`                     | Enlace al Kahoot interactivo del aula                  | `https://kahoot.it/...` |
+| `URL_QUIZIZZ`                    | Enlace a las trivias de Quizizz del aula               | `https://quizizz.com/...` |
 
 ---
 ### 5. Buenas prácticas
