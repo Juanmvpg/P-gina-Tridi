@@ -441,7 +441,7 @@
         // Google Sheets CSV URL Setup (via injected env var or local fallback)
         function getSpreadsheetUrl() {
             const meta = document.querySelector('meta[name="url-spreadsheet"]');
-            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1SxucJUDXjgqRuSRcbtFh-zy4OnVYOoqsz67SCetbN0A/export?format=csv';
+            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1SZLoY_iCSnatl3MCIFkP5zsHdtv4Cl_EFrzpm_vPR_c/export?format=csv';
             
             if (meta && meta.content && !meta.content.includes('%')) {
                 return meta.content;
@@ -557,17 +557,17 @@
                     throw new Error('Empty spreadsheet or bad data format');
                 }
                 
-                // Identify column positions: Col C = DNI, Col F = Horas Totales
-                // Index 2 is Column C, Index 5 is Column F. Let's process lines from row 1 onwards.
+                // Identify column positions: Col C = DNI, Col E = Horas Totales
+                // Index 2 is Column C, Index 4 is Column E. Let's process lines from row 1 onwards.
                 volunteerData = [];
                 let totalHoursSum = 0;
                 
                 for (let i = 1; i < parsedLines.length; i++) {
                     const row = parsedLines[i];
-                    if (row.length < 6) continue;
+                    if (row.length < 5) continue;
                     
                     const dni = row[2] ? row[2].trim() : '';
-                    const hoursRaw = row[5] ? row[5].trim() : '';
+                    const hoursRaw = row[4] ? row[4].trim() : '';
                     
                     // Skip header re-definitions or empty rows
                     if (!dni || dni.toLowerCase() === 'dni' || isNaN(dni)) {

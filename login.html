@@ -107,7 +107,7 @@
         // Google Sheets CSV URL Setup
         function getSpreadsheetUrl() {
             const meta = document.querySelector('meta[name="url-spreadsheet"]');
-            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1SxucJUDXjgqRuSRcbtFh-zy4OnVYOoqsz67SCetbN0A/export?format=csv';
+            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1SZLoY_iCSnatl3MCIFkP5zsHdtv4Cl_EFrzpm_vPR_c/export?format=csv';
             
             if (meta && meta.content && !meta.content.includes('%')) {
                 return meta.content;
@@ -168,7 +168,7 @@
                 volunteerData = [];
                 for (let i = 1; i < parsedLines.length; i++) {
                     const row = parsedLines[i];
-                    if (row.length < 6) continue;
+                    if (row.length < 3) continue;
                     
                     const dni = row[2] ? row[2].trim() : '';
                     if (!dni || dni.toLowerCase() === 'dni' || isNaN(dni)) continue;
