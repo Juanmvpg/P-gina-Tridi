@@ -409,7 +409,11 @@
     <!-- Footer -->
     <footer class="py-4 border-t border-gray-100 bg-white/50">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-[10px] text-gray-400 font-medium tracking-tight">© 2026 Tridimensionando Ideas. Diseñado por voluntarios del proyecto.</p>
+            <p class="text-[11px] text-gray-500 font-medium tracking-tight">
+                © 2026 <span class="font-semibold text-gray-700">Tridimensionando Ideas</span>. Diseñado por voluntarios del proyecto y <span class="font-semibold text-gray-800">Juan Giménez</span> — 
+                <a href="https://github.com/Juanmvpg" target="_blank" rel="noopener noreferrer" class="text-brand hover:underline font-semibold transition-opacity hover:opacity-80">GitHub</a> &bull; 
+                <a href="https://www.linkedin.com/in/juangimenezp/" target="_blank" rel="noopener noreferrer" class="text-brand hover:underline font-semibold transition-opacity hover:opacity-80">LinkedIn</a>
+            </p>
         </div>
     </footer>
 
@@ -441,7 +445,7 @@
         // Google Sheets CSV URL Setup (via injected env var or local fallback)
         function getSpreadsheetUrl() {
             const meta = document.querySelector('meta[name="url-spreadsheet"]');
-            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1SZLoY_iCSnatl3MCIFkP5zsHdtv4Cl_EFrzpm_vPR_c/export?format=csv';
+            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1RfJCp_vugDdTl-4lDKEkuZvNUWEKyX8uSibBxj2gDig/export?format=csv';
             
             if (meta && meta.content && !meta.content.includes('%')) {
                 return meta.content;
@@ -557,17 +561,17 @@
                     throw new Error('Empty spreadsheet or bad data format');
                 }
                 
-                // Identify column positions: Col C = DNI, Col E = Horas Totales
-                // Index 2 is Column C, Index 4 is Column E. Let's process lines from row 1 onwards.
+                // Identify column positions: Col A = DNI, Col C = Horas Totales
+                // Index 0 is Column A, Index 2 is Column C. Let's process lines from row 1 onwards (row 2).
                 volunteerData = [];
                 let totalHoursSum = 0;
                 
                 for (let i = 1; i < parsedLines.length; i++) {
                     const row = parsedLines[i];
-                    if (row.length < 5) continue;
+                    if (row.length < 3) continue;
                     
-                    const dni = row[2] ? row[2].trim() : '';
-                    const hoursRaw = row[4] ? row[4].trim() : '';
+                    const dni = row[0] ? row[0].trim() : '';
+                    const hoursRaw = row[2] ? row[2].trim() : '';
                     
                     // Skip header re-definitions or empty rows
                     if (!dni || dni.toLowerCase() === 'dni' || isNaN(dni)) {
