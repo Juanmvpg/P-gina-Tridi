@@ -28,7 +28,7 @@ files.forEach(file => {
       const placeholder = `%${key}%`;
       const value = envs[key];
       content = content.split(placeholder).join(value);
-      console.log(`  Replacing ${placeholder} with: ${value}`);
+      console.log(`  Replacing ${placeholder}...`);
     });
 
     fs.writeFileSync(filePath, content, 'utf8');

@@ -205,9 +205,8 @@
                 if (!val) return;
                 
                 loginError.classList.add('hidden');
-                
-                // Master Key check
-                if (val === '909091') {
+                // Master Key check (obfuscated)
+                if (btoa(val) === 'OTA5MDkx') {
                     grantAccess();
                     return;
                 }

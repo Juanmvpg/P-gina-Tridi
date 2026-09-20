@@ -1,56 +1,12 @@
 <!DOCTYPE html><html lang="es" style=""><head><link class="" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<script>
-    (function() {
-        const TIMEOUT_MS = 12 * 60 * 60 * 1000; // 12 horas de inactividad
-        const sessionActive = localStorage.getItem('tridi_session_active') === 'true';
-        const lastActivity = localStorage.getItem('tridi_last_activity');
-        const now = Date.now();
-
-        if (!sessionActive) {
-            window.location.replace('login.html');
-            return;
-        }
-
-        if (lastActivity && (now - parseInt(lastActivity, 10) > TIMEOUT_MS)) {
-            localStorage.removeItem('tridi_session_active');
-            localStorage.removeItem('tridi_last_activity');
-            window.location.replace('login.html');
-            return;
-        }
-
-        localStorage.setItem('tridi_last_activity', now.toString());
-
-        let lastUpdate = now;
-        function updateActivity() {
-            const currentTime = Date.now();
-            if (currentTime - lastUpdate > 15000) { // Throttle a 15 segundos
-                localStorage.setItem('tridi_last_activity', currentTime.toString());
-                lastUpdate = currentTime;
-            }
-        }
-
-        document.addEventListener('mousemove', updateActivity);
-        document.addEventListener('keydown', updateActivity);
-        document.addEventListener('click', updateActivity);
-        document.addEventListener('scroll', updateActivity);
-
-        setInterval(() => {
-            const latestActivity = parseInt(localStorage.getItem('tridi_last_activity') || '0', 10);
-            if (Date.now() - latestActivity > TIMEOUT_MS) {
-                localStorage.removeItem('tridi_session_active');
-                localStorage.removeItem('tridi_last_activity');
-                window.location.replace('login.html');
-            }
-        }, 5 * 60 * 1000); // Verificar cada 5 minutos
-    })();
-</script>
+<script src="auth.js"></script>
 <title>Centro Operativo - Tridimensionando Ideas</title>
 <!-- Fonts: Sora from Google Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- Tailwind CSS CDN with plugins -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Tailwind Configuration -->
@@ -74,6 +30,8 @@
           },
           fontFamily: {
             sora: ['Sora', 'sans-serif'],
+            jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
           },
           borderRadius: {
             'eight': '8px',
@@ -88,15 +46,10 @@
       background-color: #fcf9f3;
       color: #1a1a1a;
     }
-    #hero-image-container .floating-piece {
-      transform: translate(25px, -35px); /* starts floated away */
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    #hero-image-container.complete .floating-piece {
-      transform: translate(0px, 0px); /* snapped in place */
-    }
-    #hero-image-container .absolute {
-      transition: transform 0.3s ease;
+    .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
   </style>
   <meta name="url-newsletter" content="%URL_NEWSLETTER%">
@@ -145,105 +98,78 @@
 </header>
 <!-- END: MainHeader -->
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-<!-- BEGIN: HeroSection -->
-<section class="relative bg-surface-container rounded-eight overflow-hidden p-8 md:p-12 lg:p-16 flex flex-col md:flex-row items-center" data-purpose="hero-section">
-<div class="flex-1 space-y-6 z-10">
-<!-- Badge -->
-<div class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-600 text-xs font-semibold">
-<svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
-          Sistema Activo
+<!-- 1. BARRA DE ANUNCIO: BITÁCORA DEL TALLER -->
+<section class="bg-white border border-gray-200/80 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-gray-400 tracking-wider uppercase font-inter">Novedades</span>
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand"></span>
+                <h2 class="text-lg sm:text-xl font-bold text-gray-900">Bitácora del taller</h2>
+            </div>
+            <p class="text-sm text-gray-600 font-jakarta max-w-2xl leading-relaxed">
+                Seguimiento, problemas detectados y soluciones implementadas en cada jornada de impresión 3D.
+            </p>
         </div>
-<h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Bitácora del taller</h1>
-<p class="text-lg text-gray-600 max-w-xl leading-relaxed">Un newsletter que documenta el recorrido del taller desde una mirada de mejora continua: <br>- Problemas detectados en cada jornada, decisiones tomadas y soluciones implementadas para optimizar la experiencia de aprendizaje. <br>- Un registro del trabajo colaborativo detrás de cada desafío en impresión 3D.</p>
-<a href="#" id="btn-newsletter" target="_blank" class="w-max bg-brand hover:bg-brand-dark text-white font-bold py-3 px-6 rounded-eight flex items-center transition-colors">
-<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
-          Newsletter Semanal
+        
+        <a id="btn-newsletter" href="#" target="_blank" class="flex-shrink-0 bg-brand hover:bg-brand-dark text-white font-bold py-2.5 px-5 rounded-xl flex items-center shadow-md shadow-brand/20 transition-all hover:scale-[1.02] active:scale-[0.98] text-sm font-sora">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+            </svg>
+            Newsletter Semanal
         </a>
-</div>
-<!-- Hero Illustration -->
-<div class="mt-8 md:mt-0 md:ml-8 relative">
-<div id="hero-image-container" class="w-64 h-64 md:w-80 md:h-80 bg-white shadow-2xl rounded-eight flex items-center justify-center transform rotate-3 relative transition-transform duration-300 ease-in-out cursor-pointer">
-<svg viewBox="0 0 320 320" class="w-48 h-48 md:w-64 md:h-64 object-contain" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- Gradients for 3D effect -->
-    <linearGradient id="grad-top" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff9d70" />
-      <stop offset="100%" stop-color="#fc4c00" />
-    </linearGradient>
-    <linearGradient id="grad-left" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fc4c00" />
-      <stop offset="100%" stop-color="#c43b00" />
-    </linearGradient>
-    <linearGradient id="grad-right" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c43b00" />
-      <stop offset="100%" stop-color="#8a2900" />
-    </linearGradient>
-  </defs>
-  <g id="subcube-1-0-0" class="static-piece">
-    <!-- Top Face -->
-    <polygon points="198.1,142 232.7,162 198.1,182 163.5,162" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
-    <!-- Left Face -->
-    <polygon points="163.5,202 198.1,222 198.1,182 163.5,162" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
-    <!-- Right Face -->
-    <polygon points="232.7,202 198.1,222 198.1,182 232.7,162" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
-  </g>
-  <g id="subcube-0-1-0" class="static-piece">
-    <!-- Top Face -->
-    <polygon points="121.9,142 156.5,162 121.9,182 87.3,162" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
-    <!-- Left Face -->
-    <polygon points="87.3,202 121.9,222 121.9,182 87.3,162" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
-    <!-- Right Face -->
-    <polygon points="156.5,202 121.9,222 121.9,182 156.5,162" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
-  </g>
-  <g id="subcube-0-0-1" class="static-piece">
-    <!-- Top Face -->
-    <polygon points="160,76 194.6,96 160,116 125.4,96" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
-    <!-- Left Face -->
-    <polygon points="125.4,136 160,156 160,116 125.4,96" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
-    <!-- Right Face -->
-    <polygon points="194.6,136 160,156 160,116 194.6,96" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
-  </g>
-  <g id="subcube-1-1-0" class="static-piece">
-    <!-- Top Face -->
-    <polygon points="160,164 194.6,184 160,204 125.4,184" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
-    <!-- Left Face -->
-    <polygon points="125.4,224 160,244 160,204 125.4,184" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
-    <!-- Right Face -->
-    <polygon points="194.6,224 160,244 160,204 194.6,184" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
-  </g>
-  <g id="subcube-1-0-1" class="static-piece">
-    <!-- Top Face -->
-    <polygon points="198.1,98 232.7,118 198.1,138 163.5,118" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
-    <!-- Left Face -->
-    <polygon points="163.5,158 198.1,178 198.1,138 163.5,118" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
-    <!-- Right Face -->
-    <polygon points="232.7,158 198.1,178 198.1,138 232.7,118" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
-  </g>
-  <g id="subcube-0-1-1" class="static-piece">
-    <!-- Top Face -->
-    <polygon points="121.9,98 156.5,118 121.9,138 87.3,118" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
-    <!-- Left Face -->
-    <polygon points="87.3,158 121.9,178 121.9,138 87.3,118" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
-    <!-- Right Face -->
-    <polygon points="156.5,158 121.9,178 121.9,138 156.5,118" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
-  </g>
-  <g id="subcube-1-1-1" class="floating-piece">
-    <!-- Top Face -->
-    <polygon points="160,120 194.6,140 160,160 125.4,140" fill="url(#grad-top)" stroke="#e04300" stroke-width="0.5" />
-    <!-- Left Face -->
-    <polygon points="125.4,180 160,200 160,160 125.4,140" fill="url(#grad-left)" stroke="#b83700" stroke-width="0.5" />
-    <!-- Right Face -->
-    <polygon points="194.6,180 160,200 160,160 194.6,140" fill="url(#grad-right)" stroke="#8a2900" stroke-width="0.5" />
-  </g>
-</svg>
-<!-- Floating UI Element -->
-<div class="absolute -bottom-4 -right-4 bg-blue-500 text-white p-3 rounded-eight shadow-lg transform -rotate-3">
-<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
-</div>
-</div>
-</div>
+    </div>
 </section>
-<!-- END: HeroSection -->
+
+<!-- 2. HERO GALLERY SLIDER CON EFECTO FOCO / LIGHTBOX -->
+<section class="relative bg-surface-container rounded-2xl overflow-hidden p-3 sm:p-6 shadow-sm border border-gray-200 mt-6 mb-8">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 px-1">
+        <div>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand text-2xl" style="font-variation-settings: 'FILL' 1;">photo_library</span>
+                Galería de Actividades
+            </h3>
+            <p class="text-xs sm:text-sm text-gray-500 font-jakarta">Momentos destacados de nuestros talleres, visitas y jornadas de trabajo.</p>
+        </div>
+
+        <a id="btn-drive-galeria" href="%URL_CONTENIDO_COMPLETO%" target="_blank" class="inline-flex items-center text-xs sm:text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl shadow-sm transition-all hover:text-brand">
+            <span class="material-symbols-outlined text-base mr-1.5 text-blue-500">add_to_drive</span>
+            Ver álbum completo en Drive
+            <span class="material-symbols-outlined text-xs ml-1">open_in_new</span>
+        </a>
+    </div>
+
+    <div id="gallery-slider" class="relative w-full h-[250px] sm:h-[380px] md:h-[450px] rounded-xl overflow-hidden bg-gray-900 group select-none shadow-inner">
+        <div id="slides-container" class="w-full h-full relative flex items-center justify-center">
+            <!-- Loading State -->
+            <div id="gallery-loader" class="flex flex-col items-center justify-center text-white/50">
+                <svg class="animate-spin h-8 w-8 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span class="text-xs font-inter uppercase tracking-widest">Cargando fotos...</span>
+            </div>
+        </div>
+
+        <button id="prev-slide" class="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 z-10 hidden" title="Foto anterior">
+            <span class="material-symbols-outlined text-xl sm:text-2xl">chevron_left</span>
+        </button>
+        <button id="next-slide" class="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 z-10 hidden" title="Siguiente foto">
+            <span class="material-symbols-outlined text-xl sm:text-2xl">chevron_right</span>
+        </button>
+        
+        <!-- Contador de galería (reemplaza a los puntitos) -->
+        <div id="gallery-counter" class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-10 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-white/90 text-xs font-semibold tracking-wide hidden">
+            <span class="material-symbols-outlined text-[14px] align-text-bottom mr-1">photo_library</span>
+            <span id="gallery-counter-text">1 / 1</span>
+        </div>
+    </div>
+    
+    <p class="text-[11px] text-gray-400 mt-2 text-center font-jakarta">
+        Tip: Podés deslizar la imagen para cambiar de foto y usar el botón "Ampliar" para verla en pantalla completa.
+    </p>
+</section>
 <!-- BEGIN: OnboardingSection -->
 <section class="space-y-6" data-purpose="onboarding-section">
 <div class="flex justify-between items-end border-b border-gray-200 pb-2">
@@ -413,7 +339,28 @@
 
 
 
-
+<!-- MODAL EFECTO "FOCO" (LIGHTBOX EN PANTALLA COMPLETA) -->
+<div id="focus-modal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-8">
+    <button onclick="closeFocusMode()" class="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 w-12 h-12 rounded-full flex items-center justify-center transition-colors z-20" title="Cerrar (Esc)">
+        <span class="material-symbols-outlined text-2xl">close</span>
+    </button>
+    <div id="focus-counter" class="absolute top-5 left-6 text-white/70 text-xs font-inter font-bold tracking-widest uppercase z-20 bg-black/40 px-3 py-1 rounded-full border border-white/10">
+        1 / 1
+    </div>
+    <button onclick="navigateFocus(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-20" title="Anterior">
+        <span class="material-symbols-outlined text-3xl">chevron_left</span>
+    </button>
+    <button onclick="navigateFocus(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-20" title="Siguiente">
+        <span class="material-symbols-outlined text-3xl">chevron_right</span>
+    </button>
+    <div class="relative max-w-5xl max-h-[85vh] flex flex-col items-center justify-center">
+        <img id="focus-image" src="" alt="Foto en foco" class="max-h-[75vh] max-w-[92vw] object-contain rounded-xl shadow-2xl transition-all duration-300">
+        <div id="focus-caption" class="mt-4 text-center text-white space-y-1 max-w-xl">
+            <h4 id="focus-title" class="text-lg font-bold font-sora"></h4>
+            <p id="focus-desc" class="text-xs sm:text-sm text-gray-300 font-jakarta"></p>
+        </div>
+    </div>
+</div>
 
 <script>
   function applyUrl(metaName, btnId, defaultUrl) {
@@ -426,7 +373,7 @@
       btn.href = defaultUrl;
     }
   }
-  // Se proveen las URLs por defecto que me diste por si Netlify no las reemplaza aún
+
   applyUrl('url-newsletter', 'btn-newsletter', 'https://proyectotridi.my.canva.site/');
   applyUrl('url-tinkercad', 'btn-tinkercad-desktop', 'https://www.tinkercad.com/');
   applyUrl('url-tinkercad', 'btn-tinkercad-mobile', 'https://www.tinkercad.com/');
@@ -435,7 +382,6 @@
   applyUrl('url-kahoot', 'btn-kahoot', 'https://kahoot.it/');
   applyUrl('url-quizizz', 'btn-quizizz', 'https://quizizz.com/');
 
-  // Micro-interaction: Smooth hover effect for cards and header (excluding the hero image)
   document.querySelectorAll('.bg-white:not(#hero-image-container)').forEach(card => {
     card.addEventListener('mouseenter', () => {
       card.classList.add('shadow-md');
@@ -448,93 +394,267 @@
     });
   });
 
-  // Toggle rotation and completion on click for the hero illustration
-  const heroImageContainer = document.getElementById('hero-image-container');
-  const floatingBadge = heroImageContainer ? heroImageContainer.querySelector('.absolute') : null;
+  // --- CLOUDINARY GALLERY FETCH ---
+  let galleryData = [];
+  const cloudName = "uweoycde";
+  const tag = "tridi-galeria";
   
-  let clickCount = 0;
-  let clickTimer = null;
-  let requiredClicks = 7;
-  const maxRequiredClicks = 50;
+  const slidesContainer = document.getElementById('slides-container');
+  const prevBtn = document.getElementById('prev-slide');
+  const nextBtn = document.getElementById('next-slide');
+  const loader = document.getElementById('gallery-loader');
+  
+  let currentSlide = 0;
+  let slideInterval = null;
+  let slides = [];
+  const slider = document.getElementById('gallery-slider');
 
-  function triggerConfetti() {
-    const rect = heroImageContainer.getBoundingClientRect();
-    const colors = ['#fc4c00', '#138eff', '#ffcd00', '#00e676', '#ea1e63'];
-    
-    for (let i = 0; i < 40; i++) {
-      const p = document.createElement('div');
-      p.style.position = 'fixed';
-      p.style.width = (Math.random() * 8 + 4) + 'px';
-      p.style.height = (Math.random() * 8 + 4) + 'px';
-      p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      p.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-      p.style.pointerEvents = 'none';
-      p.style.zIndex = '9999';
-      
-      const angle = Math.random() * Math.PI * 2;
-      const velocity = Math.random() * 6 + 4;
-      let vx = Math.cos(angle) * velocity;
-      let vy = Math.sin(angle) * velocity - 4; // Upward velocity bias
-      let px = rect.left + rect.width / 2;
-      let py = rect.top + rect.height / 2;
-      
-      p.style.left = px + 'px';
-      p.style.top = py + 'px';
-      document.body.appendChild(p);
-      
-      let opacity = 1;
-      function update() {
-        vx *= 0.97;
-        vy += 0.25; // gravity
-        px += vx;
-        py += vy;
-        p.style.left = px + 'px';
-        p.style.top = py + 'px';
-        opacity -= 0.015;
-        p.style.opacity = opacity;
-        
-        if (opacity > 0) {
-          requestAnimationFrame(update);
-        } else {
-          p.remove();
-        }
+  async function loadCloudinaryGallery() {
+      try {
+          // Agregamos un cache-buster para evitar que el navegador guarde en memoria una versión vieja de la lista
+          const response = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/${tag}.json?t=${new Date().getTime()}`, { cache: 'no-store' });
+          if (!response.ok) throw new Error('Cloudinary list not found or restricted');
+          const data = await response.json();
+          
+          if (data.resources && data.resources.length > 0) {
+              galleryData = data.resources.map(res => ({
+                  src: `https://res.cloudinary.com/${cloudName}/image/upload/c_fill,g_auto,w_800,q_auto,f_auto/v${res.version}/${res.public_id}.${res.format}`,
+                  fullSrc: `https://res.cloudinary.com/${cloudName}/image/upload/w_1600,q_auto,f_auto/v${res.version}/${res.public_id}.${res.format}`,
+                  title: "",
+                  desc: ""
+              }));
+          } else {
+              throw new Error('No images found');
+          }
+      } catch (error) {
+          console.warn("Failed to load from Cloudinary, using fallback.", error);
+          galleryData = [
+              {
+                  src: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+                  fullSrc: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80",
+                  title: "Modelado y Diseño en Tinkercad",
+                  desc: "Los alumnos creando sus primeros llaveros personalizados."
+              },
+              {
+                  src: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=800&q=80",
+                  fullSrc: "https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=1600&q=80",
+                  title: "Impresión de Piezas Funcionales",
+                  desc: "Pruebas de calibración y materialización de los modelos diseñados."
+              },
+              {
+                  src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80",
+                  fullSrc: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1600&q=80",
+                  title: "Jornadas con Escuelas Secundarias",
+                  desc: "Demostraciones y charlas orientadas a despertar vocaciones tecnológicas."
+              }
+          ];
       }
-      requestAnimationFrame(update);
-    }
-
-    // Scale up the required clicks count for the next launch
-    if (requiredClicks < maxRequiredClicks) {
-      requiredClicks = Math.min(requiredClicks + 5, maxRequiredClicks);
-    }
+      
+      renderGallery();
   }
 
-  if (heroImageContainer && floatingBadge) {
-    heroImageContainer.addEventListener('click', () => {
-      // Toggle rotation
-      if (heroImageContainer.classList.contains('rotate-3')) {
-        heroImageContainer.classList.remove('rotate-3');
-        heroImageContainer.classList.add('rotate-0', 'complete');
-        floatingBadge.classList.remove('-rotate-3');
-        floatingBadge.classList.add('rotate-0');
-      } else {
-        heroImageContainer.classList.remove('rotate-0', 'complete');
-        heroImageContainer.classList.add('rotate-3');
-        floatingBadge.classList.remove('rotate-0');
-        floatingBadge.classList.add('-rotate-3');
-      }
+  const galleryCounter = document.getElementById('gallery-counter');
+  const galleryCounterText = document.getElementById('gallery-counter-text');
 
-      // Click-spam easter egg (requiredClicks rapid clicks, max 200ms gap between each)
-      clickCount++;
-      clearTimeout(clickTimer);
-      clickTimer = setTimeout(() => {
-        clickCount = 0;
-      }, 200);
+  function renderGallery() {
+      if (loader) loader.remove();
+      
+      let htmlAcc = "";
+      
+      galleryData.forEach((item, index) => {
+          const isFirst = index === 0;
+          const opacityClass = isFirst ? 'opacity-100' : 'opacity-0';
+          const ptrEvents = isFirst ? '' : 'pointer-events: none;';
+          
+          let captionHTML = "";
+          if (item.title || item.desc) {
+              captionHTML = `
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-4 sm:p-8 text-white pointer-events-none">
+                  <div class="flex items-center justify-between">
+                      <div>
+                          <h4 class="text-lg sm:text-2xl font-bold font-sora pointer-events-auto">${item.title}</h4>
+                          <p class="text-xs sm:text-sm text-white/80 font-jakarta line-clamp-1 pointer-events-auto">${item.desc}</p>
+                      </div>
+                      <button onclick="openFocusMode(${index})" class="flex items-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20 text-white pointer-events-auto shadow-sm transition-colors cursor-pointer">
+                          <span class="material-symbols-outlined text-sm">fullscreen</span> Ampliar
+                      </button>
+                  </div>
+              </div>`;
+          } else {
+              captionHTML = `
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex flex-col justify-end p-4 sm:p-8 text-white pointer-events-none">
+                  <div class="flex items-center justify-end">
+                      <button onclick="openFocusMode(${index})" class="flex items-center gap-1 text-xs font-semibold bg-black/40 hover:bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-white pointer-events-auto shadow-sm transition-colors cursor-pointer">
+                          <span class="material-symbols-outlined text-sm">fullscreen</span> Ampliar
+                      </button>
+                  </div>
+              </div>`;
+          }
 
-      if (clickCount >= requiredClicks) {
-        triggerConfetti();
-        clickCount = 0;
+          htmlAcc += `
+          <div class="slide absolute inset-0 ${opacityClass} transition-opacity duration-700 ease-in-out" style="${ptrEvents}">
+              <img src="${item.src}" alt="${item.title || 'Foto de galería'}" loading="lazy" class="w-full h-full object-cover">
+              ${captionHTML}
+          </div>`;
+      });
+      
+      slidesContainer.innerHTML = htmlAcc;
+      slides = document.querySelectorAll('.slide');
+      
+      if (galleryData.length > 1) {
+          prevBtn.classList.remove('hidden');
+          nextBtn.classList.remove('hidden');
+          galleryCounter.classList.remove('hidden');
+          galleryCounterText.textContent = `1 / ${galleryData.length}`;
       }
-    });
+      
+      startAutoplay();
+  }
+
+  function showSlide(index) {
+      if(!slides.length) return;
+      slides.forEach((s, i) => {
+          s.style.opacity = i === index ? '1' : '0';
+          s.style.pointerEvents = i === index ? 'auto' : 'none';
+      });
+      
+      if (galleryCounterText) {
+          galleryCounterText.textContent = `${index + 1} / ${galleryData.length}`;
+      }
+      
+      currentSlide = index;
+  }
+
+  function nextSlide() {
+      if(!slides.length) return;
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+  }
+
+  function prevSlide() {
+      if(!slides.length) return;
+      const prev = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prev);
+  }
+
+  let isHovering = false;
+
+  function startAutoplay() {
+      if(slides.length <= 1 || isHovering) return;
+      stopAutoplay(); // Prevent overlapping timers
+      slideInterval = setInterval(nextSlide, 4500);
+  }
+
+  function stopAutoplay() {
+      clearInterval(slideInterval);
+      slideInterval = null;
+  }
+
+  function restartAutoplay() {
+      stopAutoplay();
+      startAutoplay();
+  }
+
+  if(nextBtn && prevBtn) {
+      nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); restartAutoplay(); });
+      prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevSlide(); restartAutoplay(); });
+  }
+
+  if(slider) {
+      slider.addEventListener('mouseenter', () => {
+          isHovering = true;
+          stopAutoplay();
+      });
+      slider.addEventListener('mouseleave', () => {
+          isHovering = false;
+          startAutoplay();
+      });
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      slider.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      slider.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          const swipeThreshold = 50;
+          if (touchEndX < touchStartX - swipeThreshold) { nextSlide(); restartAutoplay(); }
+          if (touchEndX > touchStartX + swipeThreshold) { prevSlide(); restartAutoplay(); }
+      }, { passive: true });
+  }
+
+  // Load the gallery on page load
+  loadCloudinaryGallery();
+
+  // EFECTO FOCO / LIGHTBOX
+  let currentFocusIndex = 0;
+  const modal = document.getElementById('focus-modal');
+  const focusImg = document.getElementById('focus-image');
+  const focusTitle = document.getElementById('focus-title');
+  const focusDesc = document.getElementById('focus-desc');
+  const focusCounter = document.getElementById('focus-counter');
+
+  function openFocusMode(index) {
+      if(!galleryData.length) return;
+      stopAutoplay();
+      currentFocusIndex = index;
+      updateFocusContent();
+      modal.classList.remove('hidden');
+      setTimeout(() => { modal.classList.remove('opacity-0'); }, 10);
+      document.body.style.overflow = 'hidden'; 
+  }
+
+  function closeFocusMode() {
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+          modal.classList.add('hidden');
+          document.body.style.overflow = '';
+          startAutoplay();
+      }, 300);
+  }
+
+  function navigateFocus(direction) {
+      if(!galleryData.length) return;
+      currentFocusIndex = (currentFocusIndex + direction + galleryData.length) % galleryData.length;
+      updateFocusContent();
+  }
+
+  // Agregamos feedback visual de carga a la imagen
+  focusImg.addEventListener('load', () => {
+      focusImg.classList.remove('opacity-30', 'scale-95');
+      focusImg.classList.add('opacity-100', 'scale-100');
+  });
+
+  function updateFocusContent() {
+      const item = galleryData[currentFocusIndex];
+      if(!item) return;
+      
+      // Feedback visual inmediato: bajamos opacidad y achicamos penitas para indicar "cargando"
+      focusImg.classList.remove('opacity-100', 'scale-100');
+      focusImg.classList.add('opacity-30', 'scale-95', 'transition-all', 'duration-300');
+      
+      focusImg.src = item.fullSrc; // Se dispara el 'load' event cuando termine
+      focusTitle.textContent = item.title || '';
+      focusDesc.textContent = item.desc || '';
+      focusCounter.textContent = `${currentFocusIndex + 1} / ${galleryData.length}`;
+  }
+
+  document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+          closeFocusMode();
+      }
+      if (modal && !modal.classList.contains('hidden')) {
+          if (e.key === 'ArrowRight') navigateFocus(1);
+          if (e.key === 'ArrowLeft') navigateFocus(-1);
+      }
+  });
+
+  if(modal) {
+      modal.addEventListener('click', (e) => {
+          if (e.target === modal || e.target.classList.contains('max-w-5xl')) closeFocusMode();
+      });
   }
 
   // Logout functionality
