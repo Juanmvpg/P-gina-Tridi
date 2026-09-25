@@ -1,6 +1,15 @@
+/**
+ * @fileoverview Script de construcción (build) para inyectar variables de entorno en los archivos HTML.
+ * Busca marcadores del tipo `%NOMBRE_VARIABLE%` en los archivos HTML especificados y los reemplaza
+ * con el valor correspondiente de la variable de entorno real (process.env), o usa un valor por defecto.
+ * 
+ * Este script se ejecuta típicamente en entornos CI/CD (como Netlify) o antes de servir en local.
+ */
+
 const fs = require('fs');
 const path = require('path');
 
+/** @constant {string[]} files - Lista de archivos HTML objetivo donde se buscarán e inyectarán variables de entorno. */
 const files = ['index.html', 'recursos.html', 'lineamientos.html', 'panel.html', 'login.html'];
 
 files.forEach(file => {

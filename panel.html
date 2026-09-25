@@ -410,6 +410,27 @@
         }
 
         // RFC 4180 Compliant CSV Parser to handle quotes, newlines inside cells, and commas
+        /**
+         * Analiza texto en formato CSV y lo convierte en un array bidimensional.
+         * Implementa una lógica robusta basada en RFC 4180 que maneja correctamente:
+         * - Comas dentro de campos entrecomillados ("Juan, Perez").
+         * - Comillas dobles escapadas (""Hola"").
+         * - Saltos de línea CRLF o LF.
+         *
+         * @function parseCSV
+         * @param {string} text - El contenido en crudo del archivo CSV descargado de Google Sheets.
+         * @returns {string[][]} Array de filas, donde cada fila es un array de columnas de texto (ej. [['DNI', 'Horas'], ['39498', '10']]).
+         *
+         * @example
+         * // Uso normal
+         * const raw = 'DNI,Estado\n39498,Activo';
+         * const data = parseCSV(raw); // [['DNI', 'Estado'], ['39498', 'Activo']]
+         * 
+         * @example
+         * // Manejo de comas y quotes internas
+         * const raw = '"Perez, Juan",10';
+         * const data = parseCSV(raw); // [['Perez, Juan', '10']]
+         */
         function parseCSV(text) {
             let lines = [];
             let row = [""];
@@ -448,6 +469,19 @@
         let volunteerData = [];
 
         // Format DNI to Argentine layout: 39.498.510
+        /**
+         * Formatea un string numérico de DNI al formato estándar argentino con puntos (ej. 39.498.510).
+         * Elimina primero cualquier carácter no numérico antes de intentar formatear.
+         * 
+         * @function formatDNI
+         * @param {string} dniStr - Cadena de texto que representa el DNI.
+         * @returns {string} DNI formateado con separadores de miles, o el string original si no es un número válido.
+         * 
+         * @example
+         * formatDNI("39498510"); // Devuelve "39.498.510"
+         * formatDNI("123ABC45"); // Devuelve "12.345" (ignora letras)
+         * formatDNI("invalido"); // Devuelve "invalido"
+         */
         function formatDNI(dniStr) {
             const num = parseInt(dniStr.replace(/\D/g, ''), 10);
             if (isNaN(num)) return dniStr;
@@ -489,7 +523,23 @@
             });
         }
 
-        // Fetch and process data from Google Sheets
+        /**
+         * Realiza el fetch asincrónico del CSV público de Google Sheets con las horas de voluntarios,
+         * parsea su contenido, y renderiza la tabla y las métricas.
+         * También gestiona la UI de estados: 'cargando', 'error' y 'éxito'.
+         * 
+         * Edge cases controlados: 
+         * - Errores de red (CORS en local o servidor caído).
+         * - CSV vacío sin salto de línea.
+         * - Menos de dos filas en el archivo.
+         * 
+         * @async
+         * @function fetchVolunteerHours
+         * @returns {Promise<void>} Promesa que se resuelve cuando la tabla finaliza de renderizar.
+         * 
+         * @example
+         * document.getElementById('btn-retry').addEventListener('click', fetchVolunteerHours);
+         */
         async function fetchVolunteerHours() {
             const skeleton = document.getElementById('loading-skeleton');
             const errorDiv = document.getElementById('error-state');
@@ -623,19 +673,23 @@
                 if (parsedLines.length < 2) throw new Error('Data empty');
 
                 timelineData = [];
-                // Iniciar desde i = 3 para omitir las primeras 3 filas (metadatos / comentarios)
+                // CSV structure (columnas 0-indexadas):
+                // col 0: vacía (A) | col 1: ACTIVIDAD (B) | col 2: DESCRIPCIÓN (C) | col 3: ESTADO (D) | col 4: FORMULARIO (E) | col 5: FECHA (F)
+                // Fila 0: vacía | Fila 1: título | Fila 2: encabezados (B3:F3) | Fila 3: primer dato (B4:F4)
                 for (let i = 3; i < parsedLines.length; i++) {
                     const row = parsedLines[i];
-                    if (row.length < 7) continue;
+                    if (row.length < 4) continue;
 
                     const activity = row[1] ? row[1].trim() : '';
+                    const description = row[2] ? row[2].trim() : '';
                     const status = row[3] ? row[3].trim() : '';
-                    const date = row[6] ? row[6].trim() : '';
+                    const date = row[5] ? row[5].trim() : '';
 
-                    // Skip header row or empty rows
-                    if (!activity || activity.toLowerCase() === 'actividad') continue;
+                    // Filtrar filas vacías, headers repetidos y celdas con caracteres Braille de relleno (\u2800)
+                    const cleanActivity = activity.replace(/[\u2800-\u28FF]/g, '').trim();
+                    if (!cleanActivity || cleanActivity.toLowerCase() === 'actividad') continue;
 
-                    timelineData.push({ activity, status, date });
+                    timelineData.push({ activity: cleanActivity, description, status, date });
                 }
 
                 renderTimeline(timelineData);
@@ -696,6 +750,7 @@
                                 </span>
                             </div>
                             <h3 class="text-lg font-bold text-gray-800 font-sora">${item.activity}</h3>
+                            ${item.description ? `<p class="text-sm text-gray-500 font-jakarta leading-snug">${item.description}</p>` : ''}
                         </div>
                         <div class="flex items-center gap-2 text-xs font-bold whitespace-nowrap px-3 py-2 rounded-lg border shadow-sm self-start md:self-center ${themeClass}">
                             <span class="material-symbols-outlined text-sm">${icon}</span>
