@@ -166,11 +166,11 @@
                 const parsedLines = parseCSV(csvText);
                 
                 volunteerData = [];
-                for (let i = 1; i < parsedLines.length; i++) {
+                for (let i = 0; i < parsedLines.length; i++) {
                     const row = parsedLines[i];
-                    if (row.length < 1) continue;
+                    if (row.length < 3) continue;
                     
-                    const dni = row[0] ? row[0].trim() : '';
+                    const dni = row[2] ? row[2].trim() : '';
                     if (!dni || dni.toLowerCase() === 'dni' || isNaN(dni)) continue;
                     
                     volunteerData.push({ dni });
