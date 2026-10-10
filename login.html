@@ -107,12 +107,12 @@
         // Google Sheets CSV URL Setup
         function getSpreadsheetUrl() {
             const meta = document.querySelector('meta[name="url-spreadsheet"]');
-            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1RfJCp_vugDdTl-4lDKEkuZvNUWEKyX8uSibBxj2gDig/export?format=csv';
+            const defaultUrl = 'aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMUk5R0Y1QV84TWFBMGFZUTNjX3B5NFp4aklhT3JhWjFUUzVMa0dvWW9FdFEvZXhwb3J0P2Zvcm1hdD1jc3Y=';
             
             if (meta && meta.content && !meta.content.includes('%')) {
-                return meta.content;
+                return atob(meta.content);
             }
-            return defaultUrl;
+            return atob(defaultUrl);
         }
 
         // RFC 4180 Compliant CSV Parser

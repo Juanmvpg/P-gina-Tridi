@@ -401,12 +401,13 @@
         // Google Sheets CSV URL Setup (via injected env var or local fallback)
         function getSpreadsheetUrl() {
             const meta = document.querySelector('meta[name="url-spreadsheet"]');
-            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1RfJCp_vugDdTl-4lDKEkuZvNUWEKyX8uSibBxj2gDig/export?format=csv';
+            // Base64 encoded URL to prevent simple scraping
+            const defaultUrl = 'aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMUk5R0Y1QV84TWFBMGFZUTNjX3B5NFp4aklhT3JhWjFUUzVMa0dvWW9FdFEvZXhwb3J0P2Zvcm1hdD1jc3Y=';
             
             if (meta && meta.content && !meta.content.includes('%')) {
-                return meta.content;
+                return atob(meta.content);
             }
-            return defaultUrl;
+            return atob(defaultUrl);
         }
 
         // RFC 4180 Compliant CSV Parser to handle quotes, newlines inside cells, and commas
@@ -572,17 +573,17 @@
                     throw new Error('Empty spreadsheet or bad data format');
                 }
                 
-                // Identify column positions: Col A = DNI, Col C = Horas Totales
-                // Index 0 is Column A, Index 2 is Column C. Let's process lines from row 1 onwards (row 2).
+                // Identify column positions: Col A = DNI, Col O = Horas Totales
+                // Index 0 is Column A, Index 14 is Column O. Let's process lines from row 1 onwards (row 2).
                 volunteerData = [];
                 let totalHoursSum = 0;
                 
                 for (let i = 1; i < parsedLines.length; i++) {
                     const row = parsedLines[i];
-                    if (row.length < 3) continue;
+                    if (row.length < 15) continue;
                     
                     const dni = row[0] ? row[0].trim() : '';
-                    const hoursRaw = row[2] ? row[2].trim() : '';
+                    const hoursRaw = row[14] ? row[14].trim() : '';
                     
                     // Skip header re-definitions or empty rows
                     if (!dni || dni.toLowerCase() === 'dni' || isNaN(dni)) {
@@ -636,12 +637,13 @@
         // Cronograma parsing and rendering logic
         function getCronogramaUrl() {
             const meta = document.querySelector('meta[name="url-cronograma"]');
-            const defaultUrl = 'https://docs.google.com/spreadsheets/d/1e3bOS0IgtFsuKGqu28vhPJORfwWV29A7wyfTYnGibEA/export?format=csv';
+            // Base64 encoded URL to prevent simple scraping
+            const defaultUrl = 'aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvMWUzYk9TMElndEZzdUtHcXUyOHZoUEpPUmZ3V1YyOUE3d3lmVFluR2liRUEvZXhwb3J0P2Zvcm1hdD1jc3Y=';
             
             if (meta && meta.content && !meta.content.includes('%')) {
-                return meta.content;
+                return atob(meta.content);
             }
-            return defaultUrl;
+            return atob(defaultUrl);
         }
 
         let timelineData = [];
