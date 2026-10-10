@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="auth.js"></script>
+    <title>Minijuegos - Tridimensionando Ideas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#FC4C00', // Action Orange
+                            tech: '#138EFF',    // Tech Blue
+                        },
+                        surface: {
+                            DEFAULT: '#FCF9F3', // Workshop White
+                            container: '#F0EEE8',
+                            low: '#F6F3ED'
+                        },
+                        outline: '#916F66',
+                        'blueprint-gray': '#E2E8F0'
+                    },
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "radial-gradient(circle, #D1D5DB 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FCF9F3;
+            background-image: 
+                linear-gradient(to right, #E2E8F0 1px, transparent 1px),
+                linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-attachment: fixed;
+        }
+        h1, h2, h3, .font-sora {
+            font-family: 'Sora', sans-serif;
+        }
+        .nav-link {
+            font-family: 'Inter', sans-serif;
+        }
+        .blueprint-bg {
+            background-image: 
+                linear-gradient(to right, #E2E8F0 1px, transparent 1px),
+                linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+    <meta name="url-videotutoriales" content="%URL_VIDEOTUTORIALES%">
+    <meta name="url-presentaciones" content="%URL_PRESENTACIONES%">
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="text-brand font-extrabold text-xl tracking-tight font-sora hover:opacity-90 transition-opacity">Tridimensionando Ideas</a>
+                </div>
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">home</span>
+                        Inicio
+                    </a>
+                    <a href="recursos.html" class="flex items-center text-brand font-semibold px-1 pt-1 border-b-2 border-brand text-sm nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">inventory_2</span>
+                        Recursos
+                    </a>
+                    <a href="panel.html" class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">dashboard</span>
+                        Panel
+                    </a>
+                    <a href="lineamientos.html" class="flex items-center text-gray-500 hover:text-gray-700 text-sm font-medium nav-link">
+                        <span class="material-symbols-outlined mr-2 text-lg">description</span>
+                        Lineamientos
+                    </a>
+                </nav>
+                <!-- Logout Button -->
+                <div class="flex items-center justify-end">
+                    <button id="btn-logout" class="flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-lg hover:bg-gray-100" title="Cerrar sesión">
+                        <span class="material-symbols-outlined text-xl">logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+        <!-- Hero Section -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Centro de Recursos</h1>
+            <p class="text-lg text-gray-600 max-w-2xl font-jakarta">Todo el material de apoyo centralizado para tus clases. Accedé a los videotutoriales de Tinkercad, descargá las filminas para proyectar, bajá los archivos STL listos y consultá la guía de soluciones rápidas.</p>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex flex-wrap gap-3 mb-10">
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">school</span> Cursos
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">description</span> Filminas
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">view_in_ar</span> Modelos 3D
+            </button>
+            <button class="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium flex items-center hover:shadow-sm transition-shadow">
+                <span class="material-symbols-outlined mr-2 text-lg">construction</span> Troubleshooting
+            </button>
+        </div>
+
+        <!-- Resource Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Game 1 -->
+            <a href="juegos/Adivina_El_Objeto/index.html" class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+                <div class="relative h-48 overflow-hidden flex items-center justify-center bg-blue-50">
+                    <span class="text-8xl opacity-80 group-hover:scale-110 transition-transform">🔍</span>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">¿Qué objeto es?</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow font-jakarta">Juego de adivinanza progresiva. Las casillas se destapan de a poco y los grupos compiten por adivinar con pistas parciales.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-brand font-bold flex items-center text-sm">Jugar ahora <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Game 2 -->
+            <a href="juegos/Que_Falta/index.html" class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+                <div class="relative h-48 bg-orange-50 flex items-center justify-center">
+                    <span class="text-8xl opacity-80 group-hover:scale-110 transition-transform">👀</span>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">¿Qué Falta?</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow font-jakarta">Un juego de memoria visual. Se muestran varios objetos que luego cambian o desaparecen. ¡Descubre qué falta o qué se movió!</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-brand font-bold flex items-center text-sm">Jugar ahora <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Game 3 -->
+            <a href="juegos/Ahorcado_3D/index.html" class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex flex-col group hover:shadow-md transition-shadow">
+                <div class="relative h-48 bg-green-50 flex items-center justify-center">
+                    <span class="text-8xl opacity-80 group-hover:scale-110 transition-transform">🖨️</span>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-bold mb-2">Ahorcado 3D</h3>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow font-jakarta">Adivina la palabra oculta. Cada letra incorrecta arruina la impresión 3D generando blobs de filamento. ¡No dejes que falle!</p>
+                    <div class="flex items-center mt-auto">
+                        <span class="text-brand font-bold flex items-center text-sm">Jugar ahora <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 border-t border-gray-100 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-[11px] text-gray-500 font-medium tracking-tight">
+                © 2026 <span class="font-semibold text-gray-700">Tridimensionando Ideas</span>. Diseñado por voluntarios del proyecto y <span class="font-semibold text-gray-800">Juan Giménez</span> — 
+                <a href="https://github.com/Juanmvpg" target="_blank" rel="noopener noreferrer" class="text-brand hover:underline font-semibold transition-opacity hover:opacity-80">GitHub</a> &bull; 
+                <a href="https://www.linkedin.com/in/juangimenezp/" target="_blank" rel="noopener noreferrer" class="text-brand hover:underline font-semibold transition-opacity hover:opacity-80">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+    <!-- Spacer for BottomNavBar on mobile -->
+    <div class="h-24 md:hidden"></div>
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 pb-safe px-4 bg-surface border-t border-gray-200 shadow-lg z-50 md:hidden rounded-t-xl">
+      <a class="flex flex-col items-center justify-center text-gray-500 px-4 py-1.5" href="index.html">
+        <span class="material-symbols-outlined mb-0.5">home</span>
+        <span class="font-label-sm text-[10px] font-medium">Inicio</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-gray-500 px-4 py-1.5 " href="recursos.html">
+        <span class="material-symbols-outlined mb-0.5" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+        <span class="font-label-sm text-[10px] font-bold">Recursos</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-gray-500 px-4 py-1.5" href="panel.html">
+        <span class="material-symbols-outlined mb-0.5">dashboard</span>
+        <span class="font-label-sm text-[10px] font-medium">Panel</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-gray-500 px-4 py-1.5" href="lineamientos.html">
+        <span class="material-symbols-outlined mb-0.5">newspaper</span>
+        <span class="font-label-sm text-[10px] font-medium">Lineamientos</span>
+      </a>
+    </nav>
+
+    <script>
+      function applyUrl(metaName, btnId, defaultUrl) {
+        const meta = document.querySelector(`meta[name="${metaName}"]`);
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        if (meta && meta.content && !meta.content.includes('%')) {
+          btn.href = meta.content;
+        } else {
+          btn.href = defaultUrl;
+        }
+      }
+      applyUrl('url-videotutoriales', 'btn-videotutoriales', 'https://drive.google.com/drive/folders/1O82aKVfCP3JqR8bUhE4y9Jy9My5HXZmu?usp=sharing');
+      applyUrl('url-presentaciones', 'btn-presentaciones', 'https://docs.google.com/document/d/133DJ-1A8vmaM4WfvWOOMq3ZHMEIoHd3sP47rxDQYvY8/edit?usp=sharing');
+
+      // Micro-interaction: Smooth hover effect for cards and header
+      document.querySelectorAll('.bg-white').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.classList.add('shadow-md');
+          card.style.transform = 'translateY(-2px)';
+          card.style.transition = 'all 0.3s ease';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('shadow-md');
+          card.style.transform = 'translateY(0px)';
+        });
+      });
+
+      // Logout functionality
+      const logoutBtn = document.getElementById('btn-logout');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          localStorage.removeItem('tridi_session_active');
+          window.location.replace('login.html');
+        });
+      }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../auth.js"></script>
+    <title>¿Qué objeto es?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
+        :root {
+            --bg: #fcf9f3;
+            --surface: #ffffff;
+            --surface-alt: #eceae4;
+            --border: #dcdad4;
+            --border-hover: #c4c1b9;
+            --text: #1a1a1a;
+            --text-secondary: #4b5563;
+            --accent: #fc4c00;
+            --accent-hover: #e04300;
+            --success: #10b981;
+            --success-hover: #059669;
+            --error: #ef4444;
+            --error-hover: #dc2626;
+            --warning: #f59e0b;
+            --warning-hover: #d97706;
+            --team-1: #3b82f6;
+            --team-1-hover: #2563eb;
+            --team-2: #8b5cf6;
+            --team-2-hover: #7c3aed;
+            --team-3: #14b8a6;
+            --team-3-hover: #0d9488;
+        }
+
+        body { 
+            font-family: 'Sora', sans-serif; 
+            background-color: var(--bg); 
+            text-align: center; 
+            margin: 0;
+            padding: 20px;
+            color: var(--text);
+            background-image: radial-gradient(var(--border) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+        .game-container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 40px; 
+            background: var(--surface);
+            border-radius: 32px;
+            border: 8px solid var(--border);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            font-size: 3.5em; 
+            color: var(--accent); 
+            margin-bottom: 10px; 
+            font-weight: 900;
+            text-shadow: 2px 2px 0 var(--border), 4px 4px 0 rgba(0,0,0,0.1);
+        }
+        .points-indicator {
+            font-size: 2em;
+            color: var(--warning);
+            margin: 10px 0 20px 0;
+            font-weight: 900;
+            text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+        }
+        .board { 
+            position: relative; 
+            width: 400px; 
+            height: 400px; 
+            margin: 0 auto 30px auto; 
+            background-color: var(--surface); 
+            border: 8px solid var(--border); 
+            border-radius: 24px; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .item-emoji { font-size: 250px; user-select: none; visibility: hidden; }
+        .grid-overlay { 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+            grid-template-rows: repeat(5, 1fr); 
+            gap: 2px; 
+        }
+        .grid-cell { 
+            background-color: var(--team-2); 
+            transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .teams { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin: 30px 0; 
+        }
+        .team { 
+            padding: 24px; 
+            border: 4px solid var(--border); 
+            border-radius: 24px; 
+            background-color: var(--surface); 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+        .team:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+        }
+        .team h3 { margin: 0 0 10px 0; font-size: 1.8em; font-weight: 800; }
+        .team p { margin: 0; font-size: 3em; font-weight: 900; color: var(--text); }
+        
+        #team-0 { border-color: var(--team-1); }
+        #team-0 h3 { color: var(--team-1); }
+        #team-1 { border-color: var(--team-2); }
+        #team-1 h3 { color: var(--team-2); }
+        #team-2 { border-color: var(--team-3); }
+        #team-2 h3 { color: var(--team-3); }
+
+        .active-team { 
+            background-color: var(--surface-hover) !important; 
+            transform: scale(1.05) !important; 
+            box-shadow: 0 16px 32px rgba(0,0,0,0.15) !important;
+            outline: 4px solid var(--accent);
+            outline-offset: 4px;
+        }
+        .controls, .actions { 
+            margin-top: 20px; 
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        button { 
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2em; 
+            font-weight: 800; 
+            padding: 12px 25px; 
+            cursor: pointer; 
+            border-radius: 100px; 
+            border: none; 
+            color: white; 
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--accent);
+            box-shadow: 0 6px 0px rgba(0,0,0,0.15);
+            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
+        }
+        button:hover { 
+            background-color: var(--accent-hover); 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 0px rgba(0,0,0,0.15);
+        }
+        button:active { 
+            transform: translateY(6px); 
+            box-shadow: 0 0px 0px rgba(0,0,0,0.15); 
+        }
+        .btn-reveal { background-color: var(--team-2); }
+        .btn-reveal:hover { background-color: var(--team-2-hover); }
+        .btn-wrong { background-color: var(--error); }
+        .btn-wrong:hover { background-color: var(--error-hover); }
+        .btn-correct { background-color: var(--success); }
+        .btn-correct:hover { background-color: var(--success-hover); }
+        .btn-next { background-color: var(--team-3); }
+        .btn-next:hover { background-color: var(--team-3-hover); }
+        
+        .game-over { font-size: 3em; color: var(--error); font-weight: 900; margin-top: 20px;}
+
+        @media (max-width: 600px) {
+            .teams { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+            button { width: 100%; margin: 5px 0; }
+            .board { width: 100%; max-width: 300px; height: 300px; }
+            .item-emoji { font-size: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../juegos.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: bold; color: var(--text); background: var(--surface); padding: 10px 20px; border-radius: 12px; border: 4px solid var(--border); box-shadow: 0 4px 0 var(--border); cursor: pointer;">← Volver a Minijuegos</a>
+    <div class="game-container">
+        <h1>¿Qué objeto es?</h1>
+        <div class="points-indicator" id="points-indicator">¡Vale 3 puntos!</div>
+        
+        <div class="board" id="board">
+            <div class="item-emoji" id="item-emoji">🍎</div>
+            <div class="grid-overlay" id="grid"></div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn-reveal" onclick="uiRevealMore()" id="btn-reveal">🔍 Revelar Más</button>
+            <button class="btn-next" onclick="uiNextItem()" id="btn-next" style="display:none;">➡️ Siguiente Objeto</button>
+        </div>
+
+        <div class="teams" id="teams">
+            <div class="team" id="team-0">
+                <h3>Grupo 1</h3>
+                <p id="score-0">0</p>
+            </div>
+            <div class="team" id="team-1">
+                <h3>Grupo 2</h3>
+                <p id="score-1">0</p>
+            </div>
+            <div class="team" id="team-2">
+                <h3>Grupo 3</h3>
+                <p id="score-2">0</p>
+            </div>
+        </div>
+
+        <div class="actions" id="actions-panel">
+            <button class="btn-correct" onclick="uiGuessCorrect()" id="btn-correct">✅ ¡Adivinaron! (+<span id="points-val">3</span> pts)</button>
+            <button class="btn-wrong" onclick="uiGuessWrong()" id="btn-wrong">❌ Fallaron (Pasa turno)</button>
+        </div>
+        <div id="game-over-msg" class="game-over" style="display:none;">
+            ¡Juego Terminado!
+        </div>
+    </div>
+
+    <!-- Cargar la lógica del juego -->
+    <script src="game_logic.js"></script>
+    <script>
+        const itemsList = [
+            { emoji: "🪥", name: "Cepillo de dientes" },
+            { emoji: "🧸", name: "Oso de peluche" },
+            { emoji: "🎒", name: "Mochila" },
+            { emoji: "🐶", name: "Perro" },
+            { emoji: "🍕", name: "Pizza" },
+            { emoji: "🔑", name: "Llave" },
+            { emoji: "🎸", name: "Guitarra" },
+            { emoji: "✂️", name: "Tijeras" },
+            { emoji: "🐘", name: "Elefante" },
+            { emoji: "📱", name: "Teléfono" }
+        ];
+
+        let game = new GameLogic(itemsList);
+        const grid = document.getElementById('grid');
+        const cells = [];
+
+        // Inicializar el tablero
+        function initBoard() {
+            grid.innerHTML = '';
+            cells.length = 0;
+            for (let i = 0; i < 25; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                grid.appendChild(cell);
+                cells.push(cell);
+            }
+        }
+
+        function updateUI() {
+            const currentItem = game.getCurrentItem();
+            if (!currentItem) {
+                document.getElementById('board').style.display = 'none';
+                document.getElementById('controls').style.display = 'none';
+                document.getElementById('actions-panel').style.display = 'none';
+                
+                let maxScore = -1;
+                game.teams.forEach(t => { if (t.score > maxScore) maxScore = t.score; });
+                const winners = game.teams.filter(t => t.score === maxScore).map(t => t.name).join(', ');
+                
+                const pointsInd = document.getElementById('points-indicator');
+                pointsInd.innerText = '¡Juego Terminado! 🏆 Ganador: ' + winners;
+                pointsInd.style.display = 'block';
+                
+                const gameOverMsg = document.getElementById('game-over-msg');
+                gameOverMsg.innerHTML = '<br><button onclick="location.reload()" class="btn-reveal" style="font-size: 0.6em;">Jugar de Nuevo</button>';
+                gameOverMsg.style.display = 'block';
+                return;
+            }
+
+            document.getElementById('item-emoji').innerText = currentItem.emoji;
+            
+            // Actualizar grid
+            cells.forEach((cell, i) => {
+                if (game.coveredCells.includes(i)) {
+                    cell.style.opacity = '1';
+                } else {
+                    cell.style.opacity = '0';
+                }
+            });
+
+            // Actualizar equipos
+            for (let i = 0; i < 3; i++) {
+                const teamEl = document.getElementById('team-' + i);
+                document.getElementById('score-' + i).innerText = game.teams[i].score;
+                if (i === game.currentTeamIndex) {
+                    teamEl.classList.add('active-team');
+                } else {
+                    teamEl.classList.remove('active-team');
+                }
+            }
+
+            // Actualizar botones y puntos
+            const pts = game.getPointsVal();
+            document.getElementById('points-indicator').innerText = `¡Vale ${pts} punto${pts > 1 ? 's' : ''}!`;
+            document.getElementById('points-val').innerText = pts;
+
+            // Mostrar/Ocultar "Siguiente" o "Revelar" según el estado
+            if (game.revealStage >= 4) {
+                document.getElementById('btn-reveal').style.display = 'none';
+                document.getElementById('btn-next').style.display = 'inline-block';
+                document.getElementById('actions-panel').style.display = 'none';
+                document.getElementById('points-indicator').innerText = `¡Objeto revelado: ${currentItem.name}!`;
+            } else {
+                document.getElementById('btn-reveal').style.display = 'inline-block';
+                document.getElementById('btn-next').style.display = 'none';
+                document.getElementById('actions-panel').style.display = 'flex';
+            }
+        }
+
+        function uiRevealMore() {
+            game.revealMore();
+            updateUI();
+        }
+
+        function uiGuessCorrect() {
+            game.guessCorrect();
+            updateUI();
+        }
+
+        function uiGuessWrong() {
+            game.guessWrong();
+            updateUI();
+        }
+
+        function uiNextItem() {
+            // Ocultar temporalmente el emoji y quitar transición para tapado instantáneo
+            document.getElementById('item-emoji').style.visibility = 'hidden';
+            cells.forEach(cell => cell.style.transition = 'none');
+            
+            game.nextItem();
+            updateUI();
+            
+            // Restaurar la transición y la visibilidad
+            setTimeout(() => {
+                cells.forEach(cell => cell.style.transition = '');
+                document.getElementById('item-emoji').style.visibility = 'visible';
+            }, 50);
+        }
+
+        // Inicio
+        initBoard();
+        document.getElementById('item-emoji').style.visibility = 'visible';
+        updateUI();
+    </script>
+</body>
+</html>

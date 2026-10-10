@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tests de Lógica de Juego</title>
+    <style>
+        body { font-family: monospace; background: #1e1e1e; color: #d4d4d4; padding: 20px; }
+        h1 { color: #569cd6; }
+        .pass { color: #608b4e; }
+        .fail { color: #f44747; }
+        .suite { margin-top: 20px; font-weight: bold; color: #ce9178; }
+        .test-case { margin-left: 20px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Resultados de los Tests (Unit-Test-Generator)</h1>
+    <div id="output"></div>
+    <script src="game_logic.js"></script>
+    <script>
+        const output = document.getElementById('output');
+        function log(msg, className) {
+            const div = document.createElement('div');
+            div.className = className;
+            div.innerHTML = msg;
+            output.appendChild(div);
+        }
+
+        let passed = 0;
+        let failed = 0;
+
+        function runTest(name, testFn) {
+            try {
+                testFn();
+                log(`✔️ PASS: ${name}`, 'test-case pass');
+                passed++;
+            } catch (e) {
+                log(`❌ FAIL: ${name} <br> ${e.message}`, 'test-case fail');
+                failed++;
+            }
+        }
+
+        function assertEq(actual, expected, msg) {
+            if (actual !== expected) throw new Error(`${msg} - Se esperaba ${expected} pero se obtuvo ${actual}`);
+        }
+        function assertArrayEq(actual, expected, msg) {
+            if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error(`${msg} - Arrays distintos`);
+        }
+        function assertThrows(fn, matchStr, msg) {
+            try { fn(); } catch (e) { 
+                if (e.message.includes(matchStr)) return;
+                throw new Error(`${msg} - Error lanzó mensaje incorrecto: ${e.message}`);
+            }
+            throw new Error(`${msg} - No lanzó ningún error`);
+        }
+        function assertNotNull(val, msg) {
+            if (val === null) throw new Error(`${msg} - Valor es null`);
+        }
+
+        log("--- Happy Path Tests ---", "suite");
+
+        runTest('should correctly initialize and process a full round with correct guess (Happy Path 1)', () => {
+            const game = new GameLogic([{ name: 'Tenedor' }]);
+            assertEq(game.getCurrentTeam().id, 1, 'Turno inicial es Grupo 1');
+            assertEq(game.getCurrentItem().name, 'Tenedor', 'Debe cargar el primer objeto');
+            assertEq(game.getPointsVal(), 3, 'Puntos iniciales deben ser 3');
+            
+            const revealed = game.revealMore();
+            assertEq(revealed.length, 6, 'Debe destapar 6 celdas en la primera etapa');
+            
+            game.guessCorrect();
+            assertEq(game.teams[0].score, 3, 'Grupo 1 debe recibir 3 puntos');
+            assertEq(game.coveredCells.length, 0, 'La imagen debe revelarse por completo');
+        });
+
+        runTest('should pass turn on wrong guess and allow next team to guess (Happy Path 2)', () => {
+            const game = new GameLogic([{ name: 'Silla' }]);
+            game.revealMore(); // stage 1, pts = 3
+            game.guessWrong();
+            assertEq(game.getCurrentTeam().id, 2, 'El turno debe pasar al Grupo 2');
+            
+            game.revealMore(); // stage 2, pts = 2
+            game.guessCorrect();
+            assertEq(game.teams[1].score, 2, 'Grupo 2 debe recibir 2 puntos');
+        });
+
+        log("--- Edge Case Tests ---", "suite");
+
+        runTest('should return null when calling getCurrentItem if all items are exhausted (Edge Case 1)', () => {
+            const game = new GameLogic([{ name: 'A' }]);
+            assertNotNull(game.getCurrentItem(), 'Debe haber un objeto inicial');
+            game.nextItem();
+            assertEq(game.getCurrentItem(), null, 'Debe retornar null cuando ya no hay más objetos');
+        });
+
+        runTest('should not reveal more cells if fully revealed and array should be empty (Edge Case 2)', () => {
+            const game = new GameLogic([{ name: 'B' }]);
+            game.revealMore(); // stage 1 (6 cells)
+            game.revealMore(); // stage 2 (6 cells)
+            game.revealMore(); // stage 3 (8 cells)
+            game.revealMore(); // stage 4 (5 cells)
+            
+            assertEq(game.coveredCells.length, 0, 'Todas las celdas descubiertas');
+            assertEq(game.getPointsVal(), 0, 'No debe haber puntos');
+            
+            const extraReveal = game.revealMore();
+            assertArrayEq(extraReveal, [], 'Debe devolver un array vacío si ya se destapó todo');
+        });
+
+        log("--- Error Handling Tests ---", "suite");
+
+        runTest('should throw an error if instantiated with missing or non-array items (Error Case)', () => {
+            assertThrows(() => { new GameLogic(null); }, "array válido", 'Debe lanzar error con input null');
+            assertThrows(() => { new GameLogic("string"); }, "array válido", 'Debe lanzar error con tipo incorrecto');
+        });
+
+        log(`<br>Resumen: ${passed} pasados, ${failed} fallados.`, passed > 0 && failed === 0 ? 'pass suite' : 'fail suite');
+    </script>
+</body>
+</html>

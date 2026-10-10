@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../auth.js"></script>
+    <title>Ahorcado 3D - ¡Impresión en Peligro!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
+        :root {
+            --bg: #fcf9f3;
+            --surface: #ffffff;
+            --surface-alt: #eceae4;
+            --border: #dcdad4;
+            --border-hover: #c4c1b9;
+            --text: #1a1a1a;
+            --text-secondary: #4b5563;
+            --text-tertiary: #9ca3af;
+            --accent: #fc4c00;
+            --accent-hover: #e04300;
+            --success: #10b981;
+            --success-hover: #059669;
+            --error: #ef4444;
+            --error-hover: #dc2626;
+            --warning: #f59e0b;
+            --warning-hover: #d97706;
+            
+            --team-1: #3b82f6;
+            --team-1-hover: #2563eb;
+            --team-2: #8b5cf6;
+            --team-2-hover: #7c3aed;
+            --team-3: #14b8a6;
+            --team-3-hover: #0d9488;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Sora', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: radial-gradient(var(--border) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 0 var(--border), 4px 4px 0 rgba(0,0,0,0.1);
+            margin-bottom: 5px;
+            text-align: center;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-weight: 800;
+        }
+
+
+        .game-board {
+            background-color: var(--surface);
+            border: 8px solid var(--border);
+            border-radius: 32px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+        }
+
+        .printer-container {
+            width: 320px;
+            height: 300px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+
+        .printer-frame {
+            width: 260px;
+            height: 240px;
+            border: 16px solid var(--text);
+            border-bottom: none;
+            border-radius: 24px 24px 0 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            background-color: var(--surface-alt);
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.05);
+            z-index: 1;
+        }
+
+        .printer-x-axis {
+            width: 100%;
+            height: 16px;
+            background: var(--text-secondary);
+            position: absolute;
+            top: 40px;
+            border-radius: 8px;
+            transition: top 0.5s ease-in-out;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+            z-index: 3;
+        }
+
+        .extruder {
+            width: 48px;
+            height: 60px;
+            position: absolute;
+            top: -12px;
+            left: calc(50% - 24px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 4;
+        }
+
+        @keyframes printing {
+            0% { transform: translateX(-80px); }
+            50% { transform: translateX(80px); }
+            100% { transform: translateX(-80px); }
+        }
+
+        .extruder.is-printing {
+            animation: printing 2s infinite ease-in-out;
+        }
+
+        .extruder-body {
+            width: 48px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 12px;
+            border: 4px solid var(--text);
+            box-shadow: inset -4px -4px 0 rgba(0,0,0,0.15);
+        }
+
+        .extruder-nozzle {
+            width: 12px;
+            height: 16px;
+            background: var(--warning);
+            border: 4px solid var(--text);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            position: relative;
+        }
+
+        .filament-blobs {
+            position: absolute;
+            bottom: -20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+
+        .blob {
+            width: 20px;
+            height: 20px;
+            background: var(--error);
+            border: 3px solid var(--text);
+            border-radius: 50%;
+            margin-top: -10px;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+            --b-scale: 1;
+            transform: scale(var(--b-scale));
+            animation: popInBlob 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popInBlob {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(calc(var(--b-scale) * 1.1)); opacity: 1; }
+            100% { transform: scale(var(--b-scale)); opacity: 1; }
+        }
+
+        .printer-bed-container {
+            width: 300px;
+            height: 24px;
+            background: var(--border);
+            border: 4px solid var(--text);
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 2;
+            box-shadow: 0 8px 0 var(--border-hover);
+            margin-bottom: 10px;
+        }
+
+        .printed-piece {
+            display: flex;
+            flex-direction: column-reverse; /* stack from bottom up */
+            align-items: center;
+            width: 140px;
+            padding-bottom: 4px;
+        }
+
+        .printed-layer {
+            width: 100px;
+            height: 14px;
+            background: var(--success);
+            border: 3px solid var(--text);
+            border-radius: 6px;
+            margin-bottom: -4px;
+            transition: all 0.3s;
+            --tx: 0px;
+            --tr: 0deg;
+            transform: translateX(var(--tx)) rotate(var(--tr));
+            animation: popInLayer 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Robot Parts */
+        .layer-legs { width: 50px; height: 20px; border-radius: 4px 4px 0 0; }
+        .layer-legs::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 14px; background: var(--text);
+        }
+        .layer-torso-1 { width: 70px; height: 20px; border-radius: 4px; }
+        .layer-arms-1 { width: 100px; height: 20px; border-radius: 4px; }
+        .layer-arms-2 { width: 100px; height: 20px; border-radius: 10px 10px 4px 4px; }
+        .layer-head-1 { width: 60px; height: 20px; border-radius: 4px; }
+        .layer-head-2 {
+            width: 60px; height: 30px; border-radius: 20px 20px 4px 4px;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .layer-head-2::before, .layer-head-2::after {
+            content: ''; width: 10px; height: 10px; background: var(--surface);
+            border: 3px solid var(--text); border-radius: 50%; margin: 0 4px;
+        }
+
+        /* Machine Effects */
+        .printer-frame.machine-on {
+            background-color: #E8F5E9;
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.05), 0 0 15px rgba(0,255,136,0.2);
+        }
+        .extruder-nozzle.heat-on {
+            background: #FF3366;
+            box-shadow: 0 0 10px #FF3366;
+        }
+        .extruder-nozzle.heat-on::after {
+            content: '🔥'; position: absolute; top: 100%; left: 50%;
+            transform: translate(-50%, 5px); font-size: 14px;
+        }
+        .printed-piece.piece-finished {
+            transform: scale(1.3);
+            transform-origin: bottom center;
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 50;
+        }
+
+        @keyframes popInLayer {
+            0% { transform: translateX(var(--tx)) rotate(var(--tr)) scale(0.5); opacity: 0; }
+            70% { transform: translateX(var(--tx)) rotate(var(--tr)) scale(1.1); opacity: 1; }
+            100% { transform: translateX(var(--tx)) rotate(var(--tr)) scale(1); opacity: 1; }
+        }
+
+        /* WORD DISPLAY */
+        .word-display {
+            font-size: 3rem;
+            letter-spacing: 12px;
+            margin: 20px 0;
+            font-weight: 900;
+            text-align: center;
+            color: var(--text);
+            min-height: 60px;
+            text-shadow: 2px 2px 0 var(--border);
+        }
+
+        /* CONTROLS */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .letter-input {
+            width: 70px;
+            height: 70px;
+            font-size: 2.5rem;
+            text-align: center;
+            border: 4px solid var(--border);
+            border-radius: 16px;
+            text-transform: uppercase;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            background-color: var(--surface);
+            color: var(--text);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-shadow: inset 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .letter-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--border);
+        }
+
+        .btn-probar {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            padding: 0 30px;
+            height: 70px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            box-shadow: 0 8px 0px rgba(0,0,0,0.15);
+            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-probar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0px rgba(0,0,0,0.15);
+            background-color: var(--accent-hover);
+        }
+
+        .btn-probar:active {
+            transform: translateY(8px);
+            box-shadow: 0 0px 0px rgba(0,0,0,0.15);
+        }
+
+        .btn-probar:disabled {
+            background-color: var(--border) !important;
+            filter: none;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 4px 0px rgba(0,0,0,0.05);
+        }
+
+        /* GUESSED LETTERS */
+        .guessed-area {
+            text-align: center;
+            background: var(--surface-alt);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 4px solid var(--border);
+        }
+
+        .guessed-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .guessed-letters {
+            font-size: 1.8rem;
+            font-weight: 900;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .wrong-letter {
+            color: var(--error);
+            text-decoration: line-through;
+            text-decoration-thickness: 3px;
+            background: var(--surface);
+            padding: 5px 12px;
+            border-radius: 10px;
+            border: 2px solid var(--error);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+        }
+
+        .correct-letter {
+            color: var(--success);
+            background: var(--surface);
+            padding: 5px 12px;
+            border-radius: 10px;
+            border: 2px solid var(--success);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+        }
+
+        .status-msg {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 15px 0;
+            min-height: 45px;
+            animation: popIn 0.5s forwards;
+        }
+
+        .win { color: var(--success); text-shadow: 2px 2px 0 var(--border); }
+        .lose { color: var(--error); text-shadow: 2px 2px 0 var(--border); }
+
+        .btn-restart {
+            margin-top: 15px;
+            background-color: var(--warning);
+            color: var(--text);
+            border: none;
+            border-radius: 100px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 8px 0px rgba(0,0,0,0.15);
+            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.1s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-restart:hover {
+            background-color: var(--warning-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0px rgba(0,0,0,0.15);
+        }
+
+        .btn-restart:active {
+            transform: translateY(8px);
+            box-shadow: 0 0px 0px rgba(0,0,0,0.15);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .custom-word-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-input {
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border: 4px solid var(--border);
+            border-radius: 100px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            background-color: var(--surface);
+            color: var(--text);
+            transition: border-color 0.2s;
+            outline: none;
+            width: 250px;
+            text-align: center;
+        }
+
+        .custom-input:focus {
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .game-board { padding: 20px 10px; border-width: 4px; }
+            .word-display { font-size: 2rem; letter-spacing: 4px; }
+            .printer-container { transform: scale(0.85); transform-origin: bottom center; margin-bottom: 10px; }
+        }
+        .word-display-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .left-panel, .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            flex: 1 1 250px;
+            max-width: 320px;
+        }
+
+        .center-panel {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .game-board {
+                max-width: 100%;
+                margin: 0;
+            }
+            .custom-word-container {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+            .custom-input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .btn-restart {
+                width: 100%;
+                box-sizing: border-box;
+                margin-top: 0;
+            }
+            .word-display {
+                font-size: 3rem;
+                letter-spacing: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../../juegos.html" style="position: absolute; top: 20px; left: 20px; text-decoration: none; font-weight: bold; color: var(--text); background: var(--surface); padding: 10px 20px; border-radius: 12px; border: 4px solid var(--border); box-shadow: 0 4px 0 var(--border); cursor: pointer;">← Volver a Minijuegos</a>
+    <h1>Ahorcado 3D 🖨️</h1>
+    <div class="subtitle">¡Adivina la palabra antes de arruinar la impresión!</div>
+
+    <div class="word-display-container">
+        <div class="word-display" id="word-display"></div>
+        <div class="status-msg" id="status-msg"></div>
+    </div>
+
+    <div class="main-container">
+        <!-- Left Column -->
+        <div class="left-panel">
+
+            
+            <div class="custom-word-container">
+                <input type="password" id="custom-input" class="custom-input" placeholder="Palabra secreta..." autocomplete="off" />
+                <button class="btn-restart" onclick="startCustomGame()">✏️ Usar Personalizada</button>
+            </div>
+            <button class="btn-restart" onclick="initGame()">🔄 Palabra Aleatoria</button>
+        </div>
+
+        <!-- Center Column -->
+        <div class="center-panel">
+            <div class="game-board">
+                <div class="printer-container">
+                    <div class="printer-frame" id="printer-frame">
+                        <div class="printer-x-axis" id="printer-x-axis">
+                            <div class="extruder" id="extruder">
+                                <div class="extruder-body"></div>
+                                <div class="extruder-nozzle" id="extruder-nozzle">
+                                    <div class="filament-blobs" id="filament-blobs"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="printer-bed-container">
+                        <div class="printed-piece" id="printed-piece"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-panel">
+            <div class="controls">
+                <input type="text" maxlength="1" class="letter-input" id="letter-input" autocomplete="off" />
+                <button type="button" class="btn-probar" id="btn-probar">PROBAR</button>
+            </div>
+
+            <div class="guessed-area">
+                <div class="guessed-title">Letras utilizadas</div>
+                <div class="guessed-letters" id="guessed-letters"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const wordsPool = [
+            "DINOSAURIO", "DRAGON", "PIZZA", "ROBOT", "VOLCAN", "COHETE", "FUTBOL", 
+            "MURCIELAGO", "PLANETA", "CASTILLO", "ASTRONAUTA", "GUITARRA", "ELEFANTE", 
+            "HELADO", "TORNADO", "PIRATA", "TESORO", "UNICORNIO", "GIRASOL", "PINGUINO",
+            "COMPUTADORA", "PROGRAMACION", "DESARROLLO", "ALGORITMO", "TECLADO",
+            "MONITOR", "SISTEMA", "SOFTWARE", "INTERNET", "NAVEGADOR", "INTELIGENCIA",
+            "ARTIFICIAL", "TECNOLOGIA", "VIDEOJUEGO", "APLICACION", "SERVIDOR", "DATOS"
+        ];
+
+        function startCustomGame() {
+            const input = document.getElementById('custom-input');
+            const word = input.value.trim().toUpperCase();
+            if (word && /^[A-ZÑÁÉÍÓÚÜ\s]+$/.test(word)) {
+                initGame(word);
+                input.value = '';
+            } else {
+                alert("Por favor, ingresa una palabra válida (solo letras y espacios).");
+            }
+        }
+
+        const teamsConfig = [
+            { id: 1, name: "🔴 Grupo 1", color: "var(--team-1)" },
+            { id: 2, name: "🔵 Grupo 2", color: "var(--team-2)" },
+            { id: 3, name: "🟢 Grupo 3", color: "var(--team-3)" }
+        ];
+
+        let teams = [];
+        let currentWord = "";
+        let guessedLetters = [];
+        let errors = 0;
+        const MAX_ERRORS = 7;
+        let currentTeamIndex = 0;
+        let isGameOver = false;
+        let currentStage = 0;
+
+        let cumulativeShiftX = 0;
+        let cumulativeRot = 0;
+        let driftDirectionX = 1;
+        let driftDirectionRot = 1;
+
+        function removeAccents(str) {
+            return str
+                .replace(/[ÁÄ]/g, 'A')
+                .replace(/[ÉË]/g, 'E')
+                .replace(/[ÍÏ]/g, 'I')
+                .replace(/[ÓÖ]/g, 'O')
+                .replace(/[ÚÜ]/g, 'U');
+        }
+
+        function initGame(customWord = null) {
+            if (teams.length === 0) {
+                teams = teamsConfig.map(t => ({ ...t, score: 0 }));
+            }
+            
+            if (typeof customWord === 'string' && customWord.trim().length > 0) {
+                currentWord = customWord;
+            } else {
+                let shuffled = [...wordsPool].sort(() => 0.5 - Math.random());
+                currentWord = shuffled[0];
+            }
+            guessedLetters = [];
+            errors = 0;
+            isGameOver = false;
+            currentStage = 0;
+
+            cumulativeShiftX = 0;
+            cumulativeRot = 0;
+            driftDirectionX = Math.random() > 0.5 ? 1 : -1;
+            driftDirectionRot = Math.random() > 0.5 ? 1 : -1;
+            
+            document.getElementById('filament-blobs').innerHTML = '';
+            document.getElementById('printed-piece').innerHTML = '';
+            document.getElementById('status-msg').innerHTML = '';
+            document.getElementById('letter-input').disabled = false;
+            document.getElementById('btn-probar').disabled = false;
+            document.getElementById('extruder').classList.remove('is-printing');
+            
+            document.getElementById('printer-frame').classList.remove('machine-on');
+            document.getElementById('extruder-nozzle').classList.remove('heat-on');
+            document.getElementById('printed-piece').classList.remove('piece-finished');
+
+            document.getElementById('printer-x-axis').style.top = '40px';
+
+            document.getElementById('letter-input').value = '';
+            document.getElementById('letter-input').focus();
+
+            renderScoreboard();
+            renderWord();
+            renderGuessedLetters();
+        }
+
+        function renderScoreboard() {
+            // Scoreboard removed per user request
+        }
+
+        function renderWord() {
+            const display = document.getElementById('word-display');
+            let html = '';
+            let isWin = true;
+
+            for (let char of currentWord) {
+                if (char === ' ') {
+                    html += '&nbsp;&nbsp; ';
+                    continue;
+                }
+                let unaccented = removeAccents(char);
+                if (guessedLetters.includes(unaccented)) {
+                    html += char + ' ';
+                } else {
+                    html += '_ ';
+                    isWin = false;
+                }
+            }
+
+            if (isGameOver && !isWin) {
+                html = currentWord.split('').map(char => {
+                    if (char === ' ') return '&nbsp;&nbsp;';
+                    let unaccented = removeAccents(char);
+                    return guessedLetters.includes(unaccented) ? char : `<span style="color: var(--error)">${char}</span>`;
+                }).join(' ');
+            }
+
+            display.innerHTML = html.trim();
+
+            if (isWin && !isGameOver) {
+                endGame(true);
+            }
+        }
+
+        function renderGuessedLetters() {
+            const container = document.getElementById('guessed-letters');
+            container.innerHTML = '';
+            guessedLetters.forEach(letter => {
+                const isCorrect = removeAccents(currentWord).includes(letter);
+                const el = document.createElement('span');
+                el.className = isCorrect ? 'correct-letter' : 'wrong-letter';
+                el.innerText = letter;
+                container.appendChild(el);
+            });
+        }
+
+        function guess() {
+            if (isGameOver) return;
+
+            const input = document.getElementById('letter-input');
+            const rawLetter = input.value.toUpperCase();
+            
+            if (!rawLetter || !/^[A-ZÑÁÉÍÓÚÜ]$/.test(rawLetter)) {
+                input.value = '';
+                input.focus();
+                return;
+            }
+
+            const letter = removeAccents(rawLetter);
+            input.value = '';
+            input.focus();
+
+            if (guessedLetters.includes(letter)) {
+                return;
+            }
+
+            guessedLetters.push(letter);
+
+            if (removeAccents(currentWord).includes(letter)) {
+                teams[currentTeamIndex].score += 10;
+                
+                let uniqueLetters = new Set(removeAccents(currentWord).split('').filter(c => c !== ' '));
+                let correctGuessesCount = guessedLetters.filter(l => uniqueLetters.has(l)).length;
+                let targetStage = Math.ceil((correctGuessesCount / uniqueLetters.size) * 8);
+                if (correctGuessesCount < uniqueLetters.size && targetStage === 8) {
+                    targetStage = 7;
+                }
+                if (correctGuessesCount === uniqueLetters.size) targetStage = 8;
+                
+                while (currentStage < targetStage) {
+                    currentStage++;
+                    applyStage(currentStage);
+                }
+            } else {
+                errors++;
+                addFilamentBlob();
+            }
+
+            if (errors >= MAX_ERRORS && !isGameOver) {
+                endGame(false);
+            }
+
+            renderWord();
+
+            if (!isGameOver) {
+                currentTeamIndex = (currentTeamIndex + 1) % teams.length;
+            }
+            
+            renderScoreboard();
+            renderGuessedLetters();
+        }
+
+        function applyStage(stage) {
+            if (stage === 1) {
+                document.getElementById('printer-frame').classList.add('machine-on');
+                document.getElementById('extruder').classList.add('is-printing');
+            } else if (stage === 2) {
+                document.getElementById('extruder-nozzle').classList.add('heat-on');
+            } else if (stage >= 3 && stage <= 8) {
+                const piece = document.getElementById('printed-piece');
+                const layer = document.createElement('div');
+                layer.className = 'printed-layer';
+                
+                if (stage === 3) layer.classList.add('layer-legs');
+                else if (stage === 4) layer.classList.add('layer-torso-1');
+                else if (stage === 5) layer.classList.add('layer-arms-1');
+                else if (stage === 6) layer.classList.add('layer-arms-2');
+                else if (stage === 7) layer.classList.add('layer-head-1');
+                else if (stage === 8) layer.classList.add('layer-head-2');
+                
+                if (errors > 0) {
+                    const shiftX = (Math.random() * errors * 1.5 + errors * 0.5);
+                    const rot = (Math.random() * errors * 1.5 + errors * 0.5);
+                    cumulativeShiftX += driftDirectionX * shiftX;
+                    cumulativeRot += driftDirectionRot * rot;
+                }
+                
+                layer.style.setProperty('--tx', `${cumulativeShiftX}px`);
+                layer.style.setProperty('--tr', `${cumulativeRot}deg`);
+
+                piece.appendChild(layer);
+
+                const xAxis = document.getElementById('printer-x-axis');
+                let currentTop = parseInt(xAxis.style.top || 40);
+                if (currentTop > 5) {
+                    xAxis.style.top = (currentTop - 16) + 'px';
+                }
+            }
+            
+            if (stage === 8) {
+                document.getElementById('extruder').classList.remove('is-printing');
+                document.getElementById('extruder-nozzle').classList.remove('heat-on');
+                document.getElementById('printed-piece').classList.add('piece-finished');
+            }
+        }
+
+        function addFilamentBlob() {
+            const container = document.getElementById('filament-blobs');
+            const blob = document.createElement('div');
+            blob.className = 'blob';
+            blob.style.setProperty('--b-scale', 1 + (errors * 0.15));
+            const shiftX = (Math.random() * 10) - 5;
+            blob.style.marginLeft = `${shiftX}px`;
+            
+            container.appendChild(blob);
+        }
+
+        function endGame(isWin) {
+            isGameOver = true;
+            document.getElementById('letter-input').disabled = true;
+            document.getElementById('btn-probar').disabled = true;
+            document.getElementById('extruder').classList.remove('is-printing');
+            
+            const statusMsg = document.getElementById('status-msg');
+            if (isWin) {
+                statusMsg.innerHTML = '<span class="win">¡IMPRESIÓN EXITOSA! 🎉</span>';
+                teams[currentTeamIndex].score += 20;
+                renderScoreboard();
+            } else {
+                statusMsg.innerHTML = '<span class="lose">¡IMPRESIÓN FALLIDA! 💥</span>';
+                const container = document.getElementById('filament-blobs');
+                const giantBlob = document.createElement('div');
+                giantBlob.className = 'blob';
+                giantBlob.style.width = '60px';
+                giantBlob.style.height = '60px';
+                giantBlob.style.backgroundColor = 'var(--text)';
+                giantBlob.style.marginTop = '-20px';
+                giantBlob.style.setProperty('--b-scale', 1);
+                container.appendChild(giantBlob);
+            }
+        }
+
+        document.getElementById('letter-input').addEventListener('keyup', function(event) {
+            this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]/g, '').toUpperCase();
+            if (event.key === 'Enter') {
+                guess();
+            }
+        });
+
+        document.getElementById('letter-input').addEventListener('input', function(event) {
+            this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]/g, '').toUpperCase();
+        });
+
+        document.getElementById('btn-probar').addEventListener('click', guess);
+
+        window.onload = initGame;
+    </script>
+</body>
+</html>
+
+
+
