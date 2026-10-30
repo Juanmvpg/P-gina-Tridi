@@ -574,16 +574,16 @@
                 }
                 
                 // Identify column positions: Col A = DNI, Col O = Horas Totales
-                // Index 2 is Column C, Index 14 is Column O. Let's process lines from row 0 onwards.
+                // Index 2 is Column C (DNI), Index 11 is Column L (H. ACUMULADAS). Let's process lines from row 0 onwards.
                 volunteerData = [];
                 let totalHoursSum = 0;
                 
                 for (let i = 0; i < parsedLines.length; i++) {
                     const row = parsedLines[i];
-                    if (row.length < 15) continue;
+                    if (row.length < 12) continue;
                     
                     const dni = row[2] ? row[2].trim() : '';
-                    const hoursRaw = row[14] ? row[14].trim() : '';
+                    const hoursRaw = row[11] ? row[11].trim() : '';
                     
                     // Skip header re-definitions or empty rows
                     if (!dni || dni.toLowerCase() === 'dni' || isNaN(dni)) {
