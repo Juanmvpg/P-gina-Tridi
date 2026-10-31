@@ -23,6 +23,14 @@
 
     localStorage.setItem('tridi_last_activity', now.toString());
 
+    // Cargar temática visual de Halloween sin afectar la lógica
+    const currentScript = document.currentScript;
+    const baseUrl = currentScript && currentScript.src ? currentScript.src.replace(/auth\.js.*$/, '') : '';
+    const hwScript = document.createElement('script');
+    hwScript.src = baseUrl + 'halloween.js';
+    hwScript.defer = true;
+    document.head.appendChild(hwScript);
+
     let lastUpdate = now;
 
     /**
